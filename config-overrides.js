@@ -12,6 +12,7 @@ module.exports = function override(config, env) {
     'modules': path.resolve(__dirname, `${paths.appSrc}/modules/`),
     'utils': path.resolve(__dirname, `${paths.appSrc}/utils/`),
     'hooks': path.resolve(__dirname, `${paths.appSrc}/hooks/`),
+    'layouts': path.resolve(__dirname, `${paths.appSrc}/layouts/`),
   })(config, env);
   return config;
 }
