@@ -1,16 +1,29 @@
-import React from 'react'
-import { Router, Switch, Route, Redirect } from 'react-router-dom'
+import React, { Suspense, lazy } from 'react'
+import { Provider } from 'react-redux'
+import { Router, Switch, Route } from 'react-router-dom'
 import { history } from 'utils'
-import LoginPage from 'modules/Auth/pages/Login'
+import { Spinner } from 'components/common'
+import { withAuthorizationPermissions } from 'modules/Auth/hocs'
+import configureStore from './store'
+import App from './App'
+import 'normalize.css'
+import 'antd/dist/antd.css'
+
+const store = configureStore()
+const Login = lazy(() => import('modules/Auth/pages/Login'))
 
 const Root = () => {
   return (
-    <Router history={history}>
-      <Switch>
-        <Route exact path='/login' component={LoginPage} />
-        <Redirect path='*' to='/login' />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route exact path='/login' component={withAuthorizationPermissions(Login)} />
+            <Route path='/' component={App} />
+          </Switch>
+        </Suspense>
+      </Router>
+    </Provider>
   )
 }
 

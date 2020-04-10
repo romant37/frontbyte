@@ -29,7 +29,7 @@ const Input = props => {
         className={className}
         size={size || 'large'}
         type={type}
-        prefix={<IconComponent />}
+        prefix={icon && <IconComponent />}
         placeholder={placeholder}
         disabled={disabled}
         autoComplete='off'

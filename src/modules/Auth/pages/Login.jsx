@@ -1,35 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Field, Formik } from 'formik'
 import * as yup from 'yup'
 import { Button, Card, Alert } from 'antd'
 import { LockOutlined, UserOutlined, HomeOutlined } from '@ant-design/icons'
+import { usePrevious } from 'hooks'
+import { AuthorizationUtils } from 'utils'
 import { Input } from 'components/fields'
 import { login } from 'modules/Auth/reducers/auth'
 import styles from './styles.module.scss'
 
-const SCHEME = yup.object().shape({
-  account: yup.string().required('Required'),
-  password: yup.string().required('Required'),
-  company: yup.string().required('Required'),
+const VALIDATION_SCHEMA = yup.object().shape({
+  User: yup.string().required('Required'),
+  Password: yup.string().required('Required'),
+  Company: yup.string().required('Required'),
 })
+
+const INITIAL_VALUES = {
+  User: '',
+  Company: '',
+  Password: '',
+}
 
 const LoginPage = () => {
   
   const dispatch = useDispatch()
-  const { user } = useSelector(({ auth }) => ({ user: auth.user }))
-  console.log('user: ', user)
+  const { loggedIn } = useSelector(({ auth }) => ({ loggedIn: auth.loggedIn }))
+  const [formBag, setFormBag] = useState(null)
+  const prevLoggedIn = usePrevious(loggedIn) || {}
+
+  useEffect(() => {
+    if (prevLoggedIn.isLoading && !loggedIn.isLoading && formBag) {
+      formBag.setSubmitting(false)
+
+      if (!loggedIn.error) {
+        AuthorizationUtils.redirectToHomePage()
+      }
+    }
+  }, [formBag, loggedIn, prevLoggedIn])
 
   function handleSubmitForm(values, formikBag) {
-    console.log('values: ', values)
-    console.log('formikBag: ', formikBag)
+    setFormBag(formikBag)
     dispatch(login(values))
-  }
-
-   const initialValues = {
-    account: '',
-    company: '',
-    password: '',
   }
 
   function renderForm({ isValid, isSubmitting }) {
@@ -37,14 +49,14 @@ const LoginPage = () => {
       <Form>
         <Field
           component={Input}
-          name='company'
+          name='Company'
           size='large'
           icon={HomeOutlined}
           placeholder='Company'
         />
         <Field
           component={Input}
-          name='account'
+          name='User'
           size='large'
           icon={UserOutlined}
           placeholder='User'
@@ -52,7 +64,7 @@ const LoginPage = () => {
         <Field
           component={Input}
           type='password'
-          name='password'
+          name='Password'
           size='large'
           icon={LockOutlined}
           placeholder='Password'
@@ -71,15 +83,20 @@ const LoginPage = () => {
     )
   }
 
+  const { error } = loggedIn
+  const { ErrorMessage } = error || {}
+
   return (
     <div className={styles.root}>
       <Card title='Frontbyte' className={styles.inner}>
-        <div className={styles.error}>
-          <Alert message='some error message' type="error" />
-        </div>
+        {ErrorMessage &&
+          <div className={styles.error}>
+            <Alert message={ErrorMessage} type="error" />
+          </div>
+        }
         <Formik
-          validationSchema={SCHEME}
-          initialValues={initialValues}
+          validationSchema={VALIDATION_SCHEMA}
+          initialValues={INITIAL_VALUES}
           onSubmit={handleSubmitForm}
           isInitialValid
           validateOnBlur

@@ -1,24 +1,21 @@
 import { BaseAPI } from 'api'
+import { AuthorizationUtils } from 'utils'
 
 class AuthService extends BaseAPI {
 
-  login({ company, account, password }) {
+  login(data) {
     return this.call({
       method: 'POST',
       url: '/Session/Logon',
-      data: {
-        company,
-        account,
-        password,
-      },
+      data,
     })
   }
 
   logout() {
+    const token = AuthorizationUtils.getSessionToken()
     return this.call({
       method: 'DELETE',
-      url: '/Session/Logout',
-      data: {},
+      url: `/Session/Logout/${token}`,
     })
   }
 

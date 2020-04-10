@@ -11,6 +11,7 @@ module.exports = function override(config, env) {
     'reducers': path.resolve(__dirname, `${paths.appSrc}/reducers/`),
     'modules': path.resolve(__dirname, `${paths.appSrc}/modules/`),
     'utils': path.resolve(__dirname, `${paths.appSrc}/utils/`),
+    'hooks': path.resolve(__dirname, `${paths.appSrc}/hooks/`),
   })(config, env);
   return config;
 }

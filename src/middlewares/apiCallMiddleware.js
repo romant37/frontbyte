@@ -1,3 +1,5 @@
+import { notification } from 'antd'
+
 export const REQUEST_TYPE = '_STARTED'
 export const SUCCESS_TYPE = '_SUCCESS'
 export const FAILURE_TYPE = '_FAILURE'
@@ -23,39 +25,29 @@ const apiCallMiddleware = ({ dispatch, getState }) => next => action => {
 
   return apiCall()
     .then(({ data }) => {
-      const { status } = data
-      if (status === 'SUCCESS') {
-        const { result } = data
-        dispatch({ type, subtype: successType, payload: { result }, params })
-        if (successMessage) {
-          console.log('successMessage: ', successMessage) // eslint-disable-line
-        }
+      dispatch({ type, subtype: successType, payload: { data }, params })
 
-      } else if (status === 'ERROR') {
-        const { applicationError } = data
-
-        // Hide console log in production mode MPSC-3058
-        if (process.env.NODE_ENV !== 'production') {
-          console.error(type, 'application error:', applicationError) // eslint-disable-line
-        }
-
-        dispatch({ type, subtype: failureType, payload: { error: applicationError }, params })
-        if (enableShowErrorMessage) {
-          console.log('enableShowErrorMessage: ', enableShowErrorMessage) // eslint-disable-line
-        }
-
-      } else if (status === 'VALIDATION_ERROR') {
-        const { validationErrors } = data
-        dispatch({ type, subtype: failureType, payload: { error: status, validationErrors }, params })
-
-      } else {
-        dispatch({ type, subtype: failureType, payload: { error: `UNKNOWN STATUS: ${status}` }, params })
+      if (successMessage) {
+        notification['error']({
+          message: 'Success',
+          description: successMessage,
+        })
       }
 
       return data // allow to handle .then() on action creators if exists
     })
     .catch(error => {
-      dispatch({ type, subtype: failureType, payload: { error: error }, params })
+      const { errorResult } = error || {}
+      const { ErrorMessage } = errorResult || {}
+      dispatch({ type, subtype: failureType, payload: { error: errorResult }, params })
+
+      if (enableShowErrorMessage) {
+        notification['error']({
+          message: 'Error',
+          description: ErrorMessage,
+        })
+      }
+
       return error // allow to handle .catch() on action creators if exists
     })
 }

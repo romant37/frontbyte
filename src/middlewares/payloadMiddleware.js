@@ -1,22 +1,22 @@
 import { endsWith, isArray } from 'lodash'
+import { AuthorizationUtils } from 'utils'
+import { sessionIsExpired, SIGN_IN_USER, LOG_OUT_USER } from 'modules/Auth/reducers/auth'
 import { REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE } from './apiCallMiddleware'
-
 
 const defaultPayload = {
   isLoading: false,
   error: null,
-  validationErrors: null,
-}
-
-const checkSessionAccess = error => {
-  console.log('error: ', error)
 }
 
 const payloadMiddleware = ({ dispatch }) => next => action => {
-  const { result, error, validationErrors, params } = action.payload || {}
+  const { result, error, params } = action.payload || {}
 
-  if (error) {
-    checkSessionAccess(error, dispatch)
+  if (action.type !== SIGN_IN_USER && action.type !== LOG_OUT_USER) {
+    AuthorizationUtils.checkSessionToken()
+    const token = AuthorizationUtils.getSessionToken()
+    if (!token) {
+      dispatch(sessionIsExpired('Session expired'))
+    }
   }
 
   if (!action.subtype) {
@@ -33,7 +33,6 @@ const payloadMiddleware = ({ dispatch }) => next => action => {
     action.result = {
       ...defaultPayload,
       error,
-      validationErrors,
       params,
     }
   }

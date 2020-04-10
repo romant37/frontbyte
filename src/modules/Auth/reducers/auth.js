@@ -1,62 +1,54 @@
+import { AuthorizationUtils } from 'utils'
 import AuthService from 'modules/Auth/api/AuthService'
 
-export const SIGNIN_USER = 'SIGNIN_USER'
-export const REQUEST_STARTED = 'REQUEST_STARTED'
-export const REQUEST_FINISHED = 'REQUEST_FINISHED'
+export const SIGN_IN_USER = 'SIGN_IN_USER'
+export const LOG_OUT_USER = 'LOG_OUT_USER'
+export const SESSION_IS_EXPIRED = 'SESSION_IS_EXPIRED'
 
 export const login = params => dispatch => {
-  dispatch({ type: REQUEST_STARTED })
   dispatch({
     apiCall: () => AuthService.login(params),
-    type: SIGNIN_USER,
+    type: SIGN_IN_USER,
   })
   .then(response => {
-    const { result, status } = response || {}
-    console.log('result: ', result) // eslint-disable-line
-    console.log('status: ', status) // eslint-disable-line
-    console.log('response: ', response)
-    // if (status === 'SUCCESS') {
-    //   dispatch(storeSession(result))
-    // }
-    dispatch({ type: REQUEST_FINISHED })
-    return response
+    const { Token } = response || {}
+    if (Token) {
+      AuthorizationUtils.storeSession(Token)
+    }
   })
 }
 
+export const logout = () => dispatch => {
+  dispatch({ apiCall: () => AuthService.logout(), type: LOG_OUT_USER })
+  dispatch(sessionIsExpired('Session expired'))
+  AuthorizationUtils.redirectToLoginForm()
+}
+
+export const sessionIsExpired = error => ({
+  error,
+  type: SESSION_IS_EXPIRED,
+})
 
 export const initialState = {
-  user: {},
-  request: {},
+  loggedIn: {},
 }
 
 
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case REQUEST_STARTED:
+    case SIGN_IN_USER:
       return {
         ...state,
-        request: {
-          isLoading: true,
-        },
-      }
-
-    case REQUEST_FINISHED:
-      return {
-        ...state,
-        request: {
-          isLoading: false,
-        },
-      }
-
-    case SIGNIN_USER:
-      return {
-        ...state,
-        user: {
+        loggedIn: {
           ...action.payload.data,
           ...action.result,
         },
       }
+
+    case SESSION_IS_EXPIRED:
+    case LOG_OUT_USER:
+      return { ...initialState }
 
     default:
       return state
