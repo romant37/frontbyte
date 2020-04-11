@@ -37,9 +37,9 @@ const apiCallMiddleware = ({ dispatch, getState }) => next => action => {
       return data // allow to handle .then() on action creators if exists
     })
     .catch(error => {
-      const { errorResult } = error || {}
+      const { errorResult, status } = error || {}
       const { ErrorMessage } = errorResult || {}
-      dispatch({ type, subtype: failureType, payload: { error: errorResult }, params })
+      dispatch({ type, subtype: failureType, payload: { error: { ...errorResult, status } }, params })
 
       if (enableShowErrorMessage) {
         notification['error']({

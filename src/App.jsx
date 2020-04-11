@@ -15,9 +15,9 @@ const App = () => {
 
   // Keep token alive
   useEffect(() => {
-    const keepAliveInterval = setInterval(() => dispatch(keepAlive()), 34000)
+    const keepAliveInterval = setInterval(() => dispatch(keepAlive()), 30000)
     return () => clearInterval(keepAliveInterval)
-  })
+  }, [dispatch])
 
   useEffect(() => {
     AuthorizationUtils.checkSessionToken()

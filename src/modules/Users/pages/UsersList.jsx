@@ -1,10 +1,11 @@
 import React from 'react'
+import { PageLayout } from 'layouts'
 
 const UsersList = () => {
   return (
-    <div>
-      UsersList
-    </div>
+    <PageLayout title='Users'>
+      Content
+    </PageLayout>
   )
 }
 
