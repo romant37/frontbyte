@@ -1,6 +1,6 @@
 import { endsWith, isArray } from 'lodash'
 import { AuthorizationUtils } from 'utils'
-import { sessionIsExpired, SIGN_IN_USER, LOG_OUT_USER } from 'modules/Auth/reducers/auth'
+import { sessionIsExpired } from 'modules/Auth/reducers/auth'
 import { REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE } from './apiCallMiddleware'
 
 const defaultPayload = {
@@ -11,10 +11,10 @@ const defaultPayload = {
 const payloadMiddleware = ({ dispatch }) => next => action => {
   const { result, error, params } = action.payload || {}
 
-  if (action.type !== SIGN_IN_USER && action.type !== LOG_OUT_USER) {
-    AuthorizationUtils.checkSessionToken()
-    const token = AuthorizationUtils.getSessionToken()
-    if (!token) {
+  if (error) {
+    const { ErrorCode } = error
+    if (ErrorCode === 'InvalidSessionToken' || ErrorCode === 'MissingSessionIdentifier') {
+      AuthorizationUtils.redirectToLoginForm()
       dispatch(sessionIsExpired('Session expired'))
     }
   }

@@ -4,7 +4,7 @@ import { AuthorizationUtils } from 'utils'
 export default function withAuthorizationPermissions(WrappedComponent) {
   return class extends Component {
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
       const token = AuthorizationUtils.getSessionToken()
       if (token) {
         AuthorizationUtils.redirectToHomePage()

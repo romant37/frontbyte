@@ -19,6 +19,14 @@ class AuthService extends BaseAPI {
     })
   }
 
+  keepAlive() {
+    const token = AuthorizationUtils.getSessionToken()
+    return this.call({
+      method: 'PUT',
+      url: `/Session/KeepAlive/${token}`,
+    })
+  }
+
 }
 
 export default new AuthService()
