@@ -5,6 +5,7 @@ import { AuthorizationUtils } from 'utils'
 import { AppLayout } from 'layouts'
 import { Spinner } from 'components/common'
 import { keepAlive } from 'modules/Auth/reducers/auth'
+import { getNationalities, getRanks } from 'modules/common/reducers/dicts'
 
 const Dashboard = lazy(() => import('modules/Dashboard/pages/Dashboard'))
 const UsersList = lazy(() => import('modules/Users/pages/UsersList'))
@@ -21,7 +22,10 @@ const App = () => {
 
   useEffect(() => {
     AuthorizationUtils.checkSessionToken()
-  }, [])
+    // Prepare required data
+    dispatch(getNationalities())
+    dispatch(getRanks())
+  }, [dispatch])
 
   return (
     <AppLayout>
