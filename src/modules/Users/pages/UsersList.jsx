@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Table } from 'antd'
-import { SortUtils, DictionariesUtils } from 'utils'
+import { Table, Tag } from 'antd'
+import { SortUtils, DictionariesUtils, history } from 'utils'
 import { PageLayout } from 'layouts'
 import { getUsers } from 'modules/Users/reducers/usersList'
+import styles from './styles.module.scss'
 
 const UsersList = () => {
 
@@ -16,6 +17,14 @@ const UsersList = () => {
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch])
+  
+  function onRow(record) {
+    return {
+      onClick: () => {
+        history.push(`/users/${record.Id}`)
+      },
+    }
+  }
 
   const { isLoading } = users
 
@@ -24,19 +33,28 @@ const UsersList = () => {
       title: 'First Name',
       dataIndex: 'Firstname',
       key: 'Firstname',
+      width: '35%',
       sorter: SortUtils.sortAlphabet('Firstname'),
     },
     {
       title: 'Surname',
       dataIndex: 'Surname',
       key: 'Surname',
+      width: '35%',
       sorter: SortUtils.sortAlphabet('Surname'),
     },
     {
       title: 'Nationality',
       dataIndex: 'Nationality',
       key: 'Nationality',
-      render: id => DictionariesUtils.getNationalityName(nationalities.data, id),
+      width: '30%',
+      render: id => {
+        return (
+          <Tag color='geekblue' key={id}>
+            {DictionariesUtils.getLocalizedName(nationalities.data, id)}
+          </Tag>
+        )
+      },
     },
   ]
 
@@ -47,6 +65,8 @@ const UsersList = () => {
         rowKey='Id'
         columns={columns}
         dataSource={users.data}
+        onRow={onRow}
+        rowClassName={styles.row}
       />
     </PageLayout>
   )

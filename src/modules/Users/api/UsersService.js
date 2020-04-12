@@ -9,6 +9,13 @@ class UsersService extends BaseAPI {
     })
   }
 
+  getUserDetails(id) {
+    return this.call({
+      method: 'GET',
+      url: `/Data/GetUser/${id}`,
+    })
+  }
+
 }
 
 export default new UsersService()

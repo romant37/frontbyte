@@ -9,6 +9,7 @@ import { getNationalities, getRanks } from 'modules/common/reducers/dicts'
 
 const Dashboard = lazy(() => import('modules/Dashboard/pages/Dashboard'))
 const UsersList = lazy(() => import('modules/Users/pages/UsersList'))
+const UserDetails = lazy(() => import('modules/Users/pages/UserDetails'))
 
 const App = () => {
 
@@ -32,6 +33,7 @@ const App = () => {
       <Suspense fallback={<Spinner />}>
         <Switch>
           <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/users/:id' component={UserDetails} />
           <Route exact path='/users' component={UsersList} />
           <Redirect path='*' to='/dashboard' />
         </Switch>
