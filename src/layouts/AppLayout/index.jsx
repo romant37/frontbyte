@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Layout, Menu, Button } from 'antd'
@@ -18,6 +19,7 @@ const { Sider, Content } = Layout
 const AppLayout = ({ children }) => {
 
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [collapsed, setCollapsed] = useState(true)
   const { location } = history
   const locationKey = location.pathname.split('/')[1]
@@ -55,23 +57,23 @@ const AppLayout = ({ children }) => {
           <Menu.Item key='dashboard'>
             <Link to='/dashboard'>
               <AreaChartOutlined />
-              <span>Dashboard</span>
+              <span>{t('navigation.dashboard')}</span>
             </Link>
           </Menu.Item>
           <Menu.Item key='users'>
             <Link to='/users'>
               <TeamOutlined />
-              <span>Users</span>
+              <span>{t('navigation.users')}</span>
             </Link>
           </Menu.Item>
           <Menu.Divider className={styles.divider} />
           <Menu.Item onClick={handleLogout}>
             <LogoutOutlined />
-            <span>Logout</span>
+            <span>{t('navigation.logout')}</span>
           </Menu.Item>
         </Menu>
         <div className={styles.copy}>
-          Frontbyte 2020
+          {t('common.appName')} 2020
         </div>
       </Sider>
       <Layout>

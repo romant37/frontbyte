@@ -10,7 +10,7 @@ const PageLayout = props => {
   return (
     <div className={styles.root}>
       <div className={styles.header}>
-        <Title>{title}</Title>
+        <Title level={2}>{title}</Title>
       </div>
       <div className={styles.content}>
         {isLoading && <Spinner />}

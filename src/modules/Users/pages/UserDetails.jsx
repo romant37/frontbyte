@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Descriptions, Card, Tag } from 'antd'
 import { DictionariesUtils, DateUtils, history } from 'utils'
 import { PageLayout } from 'layouts'
@@ -9,6 +10,7 @@ import { getUserDetails } from 'modules/Users/reducers/usersList'
 const UserDetails = () => {
 
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const { userDetails, nationalities, ranks } = useSelector(({ usersList, dicts }) => ({
     userDetails: usersList.userDetails,
     nationalities: dicts.nationalities,
@@ -47,22 +49,22 @@ const UserDetails = () => {
     } = userDetails.data || {}
     return (
       <Descriptions layout='vertical' bordered>
-        <Descriptions.Item label='First Name'>{Firstname}</Descriptions.Item>
-        <Descriptions.Item label='Surname'>{Surname}</Descriptions.Item>
-        <Descriptions.Item label='Date Of Birth'>
+        <Descriptions.Item label={t('users.firstName')}>{Firstname}</Descriptions.Item>
+        <Descriptions.Item label={t('users.surname')}>{Surname}</Descriptions.Item>
+        <Descriptions.Item label={t('users.dateOfBirth')}>
           {DateUtils.formatDate(DateOfBirth)}
         </Descriptions.Item>
-        <Descriptions.Item label='Nationality'>
+        <Descriptions.Item label={t('users.nationality')}>
           <Tag color='geekblue' key={Nationality}>
             {DictionariesUtils.getLocalizedName(nationalities.data, Nationality)}
           </Tag>
         </Descriptions.Item>
-        <Descriptions.Item label='Rank'>
+        <Descriptions.Item label={t('users.rank')}>
           <Tag color='green' key={Rank}>
             {DictionariesUtils.getLocalizedName(ranks.data, Rank)}
           </Tag>
         </Descriptions.Item>
-        <Descriptions.Item label='Address'>{Address}</Descriptions.Item>
+        <Descriptions.Item label={t('users.address')}>{Address}</Descriptions.Item>
       </Descriptions>
     )
   }
@@ -73,7 +75,7 @@ const UserDetails = () => {
       isLoading={userDetails.isLoading}
     >
       <Card
-        title='User Info'
+        title={t('users.info')}
         extra={renderEditButton()}
       >
         {renderInfo()}

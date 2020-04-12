@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { format } from 'date-fns'
 import { Button, Modal, Alert } from 'antd'
 import { Form, Field, Formik } from 'formik'
@@ -10,20 +11,21 @@ import { Input, Select, DatePicker } from 'components/fields'
 import { editUser } from 'modules/Users/reducers/usersList'
 import styles from './styles.module.scss'
 
-const VALIDATION_SCHEMA = yup.object().shape({
-  Firstname: yup.string().required('Required'),
-  Surname: yup.string().required('Required'),
-  DateOfBirth: yup.string().required('Required'),
-  Nationality: yup.number().required('Required'),
-  Rank: yup.string().required('Required'),
-  Address: yup.string().required('Required'),
-})
-
 const EditUserForm = props => {
 
+  const { t } = useTranslation()
   const [isOpen, setVisibility] = useState(false)
   const [formBag, setFormBag] = useState(null)
   const { user, onSuccess } = props
+
+  const VALIDATION_SCHEMA = yup.object().shape({
+    Firstname: yup.string().required(t('common.required')),
+    Surname: yup.string().required(t('common.required')),
+    DateOfBirth: yup.string().required(t('common.required')),
+    Nationality: yup.number().required(t('common.required')),
+    Rank: yup.string().required(t('common.required')),
+    Address: yup.string().required(t('common.required')),
+  })
 
   const dispatch = useDispatch()
   const { nationalities, ranks, userEdit } = useSelector(({ dicts, usersList }) => ({
@@ -64,34 +66,36 @@ const EditUserForm = props => {
         <Field
           component={Input}
           name='Firstname'
-          placeholder='First Name'
+          placeholder={t('users.firstName')}
         />
         <Field
           component={Input}
           name='Surname'
-          placeholder='Surname'
+          placeholder={t('users.surname')}
         />
         <Field
           component={DatePicker}
           name='DateOfBirth'
-          placeholder='Date Of Birth'
+          placeholder={t('users.dateOfBirth')}
         />
         <Field
           component={Input}
           name='Address'
-          placeholder='Address'
+          placeholder={t('users.address')}
         />
         <Field
           component={Select}
           name='Nationality'
           valueName='Name'
           items={nationalities.data}
+          placeholder={t('users.nationality')}
         />
         <Field
           component={Select}
           name='Rank'
           valueName='Name'
           items={ranks.data}
+          placeholder={t('users.rank')}
         />
         <Button
           htmlType='submit'
@@ -100,7 +104,7 @@ const EditUserForm = props => {
           type='primary'
           disabled={!isValid || isSubmitting}
         >
-          Save changes
+          {t('users.edit.save')}
         </Button>
       </Form>
     )
@@ -119,7 +123,7 @@ const EditUserForm = props => {
         onClick={toggleModal}
       />
       <Modal
-        title='Edit user'
+        title={t('users.edit.title')}
         visible={isOpen}
         onCancel={toggleModal}
         destroyOnClose={true}

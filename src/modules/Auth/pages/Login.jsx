@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Form, Field, Formik } from 'formik'
 import * as yup from 'yup'
 import { Button, Card, Alert } from 'antd'
@@ -10,12 +11,6 @@ import { Input } from 'components/fields'
 import { login } from 'modules/Auth/reducers/auth'
 import styles from './styles.module.scss'
 
-const VALIDATION_SCHEMA = yup.object().shape({
-  User: yup.string().required('Required'),
-  Password: yup.string().required('Required'),
-  Company: yup.string().required('Required'),
-})
-
 const INITIAL_VALUES = {
   User: '',
   Company: '',
@@ -25,9 +20,16 @@ const INITIAL_VALUES = {
 const LoginPage = () => {
   
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const { loggedIn } = useSelector(({ auth }) => ({ loggedIn: auth.loggedIn }))
   const [formBag, setFormBag] = useState(null)
   const prevLoggedIn = usePrevious(loggedIn) || {}
+
+  const VALIDATION_SCHEMA = yup.object().shape({
+    User: yup.string().required(t('common.required')),
+    Password: yup.string().required(t('common.required')),
+    Company: yup.string().required(t('common.required')),
+  })
 
   useEffect(() => {
     if (prevLoggedIn.isLoading && !loggedIn.isLoading && formBag) {
@@ -52,14 +54,14 @@ const LoginPage = () => {
           name='Company'
           size='large'
           icon={HomeOutlined}
-          placeholder='Company'
+          placeholder={t('login.company')}
         />
         <Field
           component={Input}
           name='User'
           size='large'
           icon={UserOutlined}
-          placeholder='User'
+          placeholder={t('login.user')}
         />
         <Field
           component={Input}
@@ -67,7 +69,7 @@ const LoginPage = () => {
           name='Password'
           size='large'
           icon={LockOutlined}
-          placeholder='Password'
+          placeholder={t('login.password')}
         />
         <Button
           className={styles.button}
@@ -77,7 +79,7 @@ const LoginPage = () => {
           type='primary'
           disabled={!isValid || isSubmitting}
         >
-          Sign In
+          {t('login.signIn')}
         </Button>
       </Form>
     )
@@ -88,7 +90,7 @@ const LoginPage = () => {
 
   return (
     <div className={styles.root}>
-      <Card title='Frontbyte' className={styles.inner}>
+      <Card title={t('common.appName')} className={styles.inner}>
         {ErrorMessage &&
           <div className={styles.error}>
             <Alert message={ErrorMessage} type='error' />

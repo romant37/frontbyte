@@ -1,9 +1,11 @@
 import React from 'react'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 import { Form, DatePicker } from 'antd'
 
 const DateInput = props => {
 
+  const { t } = useTranslation()
   const { form, field, label, placeholder, disabled, className, helperText, size } = props
   const fieldError = form.errors[field.name]
   const isTouched = form.touched[field.name]
@@ -30,7 +32,7 @@ const DateInput = props => {
         value={momentDate}
         className={className}
         size={size || 'large'}
-        placeholder={placeholder || 'Select date'}
+        placeholder={placeholder || t('common.datePicker.select')}
         disabled={disabled}
         autoComplete='off'
         autoCapitalize='off'

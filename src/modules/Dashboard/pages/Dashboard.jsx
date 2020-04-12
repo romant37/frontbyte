@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Card, Progress, Col, Row } from 'antd'
 import { PageLayout } from 'layouts'
 import { getSummary } from 'modules/Dashboard/reducers/dashboard'
@@ -8,6 +9,7 @@ import styles from './styles.module.scss'
 const Dashboard = () => {
 
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const { summary } = useSelector(({ dashboard }) => ({
     summary: dashboard.summary,
   }))
@@ -50,7 +52,7 @@ const Dashboard = () => {
   }
 
   return (
-    <PageLayout title='Dashboard' isLoading={isLoading}>
+    <PageLayout title={t('navigation.dashboard')} isLoading={isLoading}>
       {renderTrainingsProgress()}
     </PageLayout>
   )

@@ -1,0 +1,24 @@
+{
+  "common.appName": "Фронтбайт",
+  "common.required": "Обязательное",
+  "common.datePicker.select": "Выберите дату",
+
+  "login.company": "Компания",
+  "login.user": "Пользователь",
+  "login.password": "Пароль",
+  "login.signIn": "Войти",
+
+  "navigation.dashboard": "Статистика",
+  "navigation.users": "Пользователи",
+  "navigation.logout": "Выйти",
+
+  "users.firstName": "Имя",
+  "users.surname": "Фамилия",
+  "users.nationality": "Национальность",
+  "users.dateOfBirth": "Дата рождения",
+  "users.rank": "Ранг",
+  "users.address": "Адрес",
+  "users.info": "Информация",
+  "users.edit.title": "Редактирование пользователя",
+  "users.edit.save": "Сохранить изменения"
+}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Table, Tag } from 'antd'
 import { SortUtils, DictionariesUtils, history } from 'utils'
 import { PageLayout } from 'layouts'
@@ -9,6 +10,7 @@ import styles from './styles.module.scss'
 const UsersList = () => {
 
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const { users, nationalities } = useSelector(({ usersList, dicts }) => ({
     users: usersList.users,
     nationalities: dicts.nationalities,
@@ -30,21 +32,21 @@ const UsersList = () => {
 
   const columns = [
     {
-      title: 'First Name',
+      title: t('users.firstName'),
       dataIndex: 'Firstname',
       key: 'Firstname',
       width: '35%',
       sorter: SortUtils.sortAlphabet('Firstname'),
     },
     {
-      title: 'Surname',
+      title: t('users.surname'),
       dataIndex: 'Surname',
       key: 'Surname',
       width: '35%',
       sorter: SortUtils.sortAlphabet('Surname'),
     },
     {
-      title: 'Nationality',
+      title: t('users.nationality'),
       dataIndex: 'Nationality',
       key: 'Nationality',
       width: '30%',
@@ -59,7 +61,7 @@ const UsersList = () => {
   ]
 
   return (
-    <PageLayout title='Users'>
+    <PageLayout title={t('navigation.users')}>
       <Table
         loading={isLoading}
         rowKey='Id'
