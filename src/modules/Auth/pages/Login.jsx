@@ -91,7 +91,7 @@ const LoginPage = () => {
       <Card title='Frontbyte' className={styles.inner}>
         {ErrorMessage &&
           <div className={styles.error}>
-            <Alert message={ErrorMessage} type="error" />
+            <Alert message={ErrorMessage} type='error' />
           </div>
         }
         <Formik

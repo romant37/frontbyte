@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Descriptions, Card, Tag } from 'antd'
 import { DictionariesUtils, DateUtils, history } from 'utils'
 import { PageLayout } from 'layouts'
+import { EditUserForm } from 'modules/Users/components'
 import { getUserDetails } from 'modules/Users/reducers/usersList'
 
 const UserDetails = () => {
@@ -14,15 +15,28 @@ const UserDetails = () => {
     ranks: dicts.ranks,
   }))
 
-  useEffect(() => {
+  function getCurrentUser() {
     const { location } = history
     const locationKey = location.pathname.replace('/users/' , '')
     dispatch(getUserDetails(locationKey))
-  }, [dispatch])
+  }
+
+  useEffect(() => {
+    getCurrentUser()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function getTitle() {
     const { Firstname = '', Surname = '' } = userDetails.data || {}
     return `${Firstname} ${Surname}`
+  }
+
+  function renderEditButton() {
+    return (
+      <EditUserForm
+        user={userDetails.data}
+        onSuccess={getCurrentUser}
+      />
+    )
   }
 
   function renderInfo() {
@@ -58,7 +72,10 @@ const UserDetails = () => {
       title={getTitle()}
       isLoading={userDetails.isLoading}
     >
-      <Card title='User Info'>
+      <Card
+        title='User Info'
+        extra={renderEditButton()}
+      >
         {renderInfo()}
       </Card>
     </PageLayout>

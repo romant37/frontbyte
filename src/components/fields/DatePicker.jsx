@@ -1,16 +1,18 @@
 import React from 'react'
-import { Form, Input as InputComponent } from 'antd'
+import moment from 'moment'
+import { Form, DatePicker } from 'antd'
 
-const Input = props => {
+const DateInput = props => {
 
-  const { form, field, type = 'text', label, icon, placeholder, disabled, className, helperText, size } = props
+  const { form, field, label, placeholder, disabled, className, helperText, size } = props
   const fieldError = form.errors[field.name]
   const isTouched = form.touched[field.name]
   const isShowError = !!(fieldError && isTouched)
-  const IconComponent = icon
+  const momentDate = field.value ? moment((new Date(field.value)), 'YYYY-MM-DD') : null
 
-  function onValueChange(e) {
-    form.setFieldValue(field.name, e.target.value)
+  function onValueChange(date, dateString) {
+    const setValue = dateString ? moment(dateString, 'YYYY-MM-DD') : null
+    form.setFieldValue(field.name, setValue)
   }
 
   function onBlur() {
@@ -23,19 +25,18 @@ const Input = props => {
       validateStatus={fieldError && isTouched && "error"}
       help={isShowError ? fieldError : helperText}
     >
-      <InputComponent
+      <DatePicker
         {...field}
-        value={field.value || ''}
+        value={momentDate}
         className={className}
         size={size || 'large'}
-        type={type}
-        prefix={icon && <IconComponent />}
-        placeholder={placeholder}
+        placeholder={placeholder || 'Select date'}
         disabled={disabled}
         autoComplete='off'
         autoCapitalize='off'
         spellCheck='false'
         autoCorrect='off'
+        style={{ width: '100%' }}
         onChange={onValueChange}
         onBlur={onBlur}
       />
@@ -43,4 +44,4 @@ const Input = props => {
   )
 }
 
-export default Input
+export default DateInput

@@ -28,7 +28,7 @@ const apiCallMiddleware = ({ dispatch, getState }) => next => action => {
       dispatch({ type, subtype: successType, payload: { data }, params })
 
       if (successMessage) {
-        notification['error']({
+        notification['success']({
           message: 'Success',
           description: successMessage,
         })
