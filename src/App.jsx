@@ -22,10 +22,14 @@ const App = () => {
   }, [dispatch])
 
   useEffect(() => {
-    AuthorizationUtils.checkSessionToken()
-    // Prepare required data
-    dispatch(getNationalities())
-    dispatch(getRanks())
+    const token = AuthorizationUtils.getSessionToken()
+    if (token) {
+      // Prepare required data
+      dispatch(getNationalities())
+      dispatch(getRanks())
+    } else {
+      AuthorizationUtils.redirectToLoginForm()
+    }
   }, [dispatch])
 
   return (
