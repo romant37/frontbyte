@@ -4,8 +4,8 @@ import { SESSION_IS_EXPIRED } from 'modules/Auth/reducers/auth'
 export const DASHBOARD_GET_SUMMARY = 'DASHBOARD_GET_SUMMARY'
 
 export const getSummary = () => ({
-  apiCall: () => DashboardService.getSummary(),
-  type: DASHBOARD_GET_SUMMARY
+  type: DASHBOARD_GET_SUMMARY,
+  apiRequest: () => DashboardService.getSummary(),
 })
 
 export const initialState = {
