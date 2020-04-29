@@ -18,29 +18,29 @@ export default function* apiRequest(action) {
 	yield put({ type, subtype: requestType, payload: {}, params })
 
 	try {
-    const { data } = yield call(apiRequest)
-    yield put({ type, subtype: successType, payload: { data } })
-    
-    if (successMessage) {
-      notification['success']({
-        message: 'Success',
-        description: successMessage,
-      })
-    }
+		const { data } = yield call(apiRequest)
+		yield put({ type, subtype: successType, payload: { data } })
+		
+		if (successMessage) {
+			notification['success']({
+				message: 'Success',
+				description: successMessage,
+			})
+		}
 
-    return data
+		return data
 	} catch (error) {
-    const { errorResult, status } = error || {}
-    const { ErrorMessage } = errorResult || {}
-    yield put({ type, subtype: failureType, payload: { error: { ...errorResult, status } }, params })
-    
-    if (enableShowErrorMessage) {
-      notification['error']({
-        message: 'Error',
-        description: ErrorMessage,
-      })
-    }
+		const { errorResult, status } = error || {}
+		const { ErrorMessage } = errorResult || {}
+		yield put({ type, subtype: failureType, payload: { error: { ...errorResult, status } }, params })
+		
+		if (enableShowErrorMessage) {
+			notification['error']({
+				message: 'Error',
+				description: ErrorMessage,
+			})
+		}
 
-    return error
+		return error
 	}
 }
