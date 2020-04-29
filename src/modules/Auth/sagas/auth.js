@@ -6,20 +6,20 @@ import { SIGN_IN_USER, LOG_OUT_USER, KEEP_ALIVE } from 'modules/Auth/reducers/au
 
 function* login(action) {
 	const response = yield* apiRequest(action)
-    const { Token } = response || {}
-    if (Token) {
-        AuthorizationUtils.storeSession(Token)
-    }
+	const { Token } = response || {}
+	if (Token) {
+			AuthorizationUtils.storeSession(Token)
+	}
 }
 
 function* logout(action) {
 	try {
-        yield* apiRequest(action)
+				yield* apiRequest(action)
 	} finally {
-        if (!action.subtype) {
-            yield put(sessionIsExpired('Session expired'))
-            AuthorizationUtils.redirectToLoginForm()
-        }
+				if (!action.subtype) {
+						yield put(sessionIsExpired('Session expired'))
+						AuthorizationUtils.redirectToLoginForm()
+				}
 	}
 }
 
