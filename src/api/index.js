@@ -1,5 +1,3 @@
 import BaseAPI from './BaseAPI'
 
-export {
-  BaseAPI,
-}
+export { BaseAPI }

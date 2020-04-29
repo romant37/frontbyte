@@ -21,7 +21,11 @@ const Root = () => {
         <Router history={history}>
           <Suspense fallback={<Spinner />}>
             <Switch>
-              <Route exact path='/login' component={withAuthorizationPermissions(Login)} />
+              <Route
+                exact
+                path='/login'
+                component={withAuthorizationPermissions(Login)}
+              />
               <Route path='/' component={App} />
             </Switch>
           </Suspense>

@@ -2,13 +2,9 @@ import { history } from 'utils'
 
 export const USER_AUTH = 'USER_AUTH'
 
-const ANONYMOUS_API_METHODS = [
-  '/Logon',
-  '/Logout',
-]
+const ANONYMOUS_API_METHODS = ['/Logon', '/Logout']
 
 class AuthorizationUtils {
-
   storeSession(token) {
     localStorage.setItem(USER_AUTH, token)
   }
@@ -45,7 +41,6 @@ class AuthorizationUtils {
   isAnonymousApiMethod(url) {
     return ANONYMOUS_API_METHODS.some(path => path.includes(url))
   }
-
 }
 
 export default new AuthorizationUtils()

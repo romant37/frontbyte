@@ -12,7 +12,6 @@ import { editUser } from 'modules/Users/reducers/usersList'
 import styles from './styles.module.scss'
 
 const EditUserForm = props => {
-
   const { t } = useTranslation()
   const [isOpen, setVisibility] = useState(false)
   const [formBag, setFormBag] = useState(null)
@@ -28,11 +27,13 @@ const EditUserForm = props => {
   })
 
   const dispatch = useDispatch()
-  const { nationalities, ranks, userEdit } = useSelector(({ dicts, usersList }) => ({
-    nationalities: dicts.nationalities,
-    ranks: dicts.ranks,
-    userEdit: usersList.userEdit,
-  }))
+  const { nationalities, ranks, userEdit } = useSelector(
+    ({ dicts, usersList }) => ({
+      nationalities: dicts.nationalities,
+      ranks: dicts.ranks,
+      userEdit: usersList.userEdit,
+    })
+  )
   const prevUserEdit = usePrevious(userEdit) || {}
 
   function toggleModal() {
@@ -129,11 +130,11 @@ const EditUserForm = props => {
         destroyOnClose={true}
         footer={null}
       >
-        {ErrorMessage &&
+        {ErrorMessage && (
           <div className={styles.error}>
             <Alert message={ErrorMessage} type='error' />
           </div>
-        }
+        )}
         <Formik
           validationSchema={VALIDATION_SCHEMA}
           initialValues={user}

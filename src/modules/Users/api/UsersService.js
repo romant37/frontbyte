@@ -1,7 +1,6 @@
 import { BaseAPI } from 'api'
 
 class UsersService extends BaseAPI {
-
   getUsers() {
     return this.call({
       method: 'GET',
@@ -24,7 +23,6 @@ class UsersService extends BaseAPI {
       data: { ...rest },
     })
   }
-
 }
 
 export default new UsersService()

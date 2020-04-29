@@ -19,10 +19,8 @@ export const initialState = {
   ranks: {},
 }
 
-
 export default (state = initialState, action) => {
   switch (action.type) {
-
     case DICTIONARIES_GET_NATIONALITIES:
       return {
         ...state,

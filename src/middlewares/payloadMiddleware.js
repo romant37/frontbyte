@@ -13,7 +13,11 @@ const payloadMiddleware = ({ dispatch }) => next => action => {
 
   if (error) {
     const { ErrorCode, status } = error
-    if (ErrorCode === 'InvalidSessionToken' || ErrorCode === 'MissingSessionIdentifier' || status === 401) {
+    if (
+      ErrorCode === 'InvalidSessionToken' ||
+      ErrorCode === 'MissingSessionIdentifier' ||
+      status === 401
+    ) {
       AuthorizationUtils.redirectToLoginForm()
       dispatch(sessionIsExpired('Session expired'))
     }

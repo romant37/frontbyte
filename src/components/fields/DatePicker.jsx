@@ -4,13 +4,23 @@ import { useTranslation } from 'react-i18next'
 import { Form, DatePicker } from 'antd'
 
 const DateInput = props => {
-
   const { t } = useTranslation()
-  const { form, field, label, placeholder, disabled, className, helperText, size } = props
+  const {
+    form,
+    field,
+    label,
+    placeholder,
+    disabled,
+    className,
+    helperText,
+    size,
+  } = props
   const fieldError = form.errors[field.name]
   const isTouched = form.touched[field.name]
   const isShowError = !!(fieldError && isTouched)
-  const momentDate = field.value ? moment((new Date(field.value)), 'YYYY-MM-DD') : null
+  const momentDate = field.value
+    ? moment(new Date(field.value), 'YYYY-MM-DD')
+    : null
 
   function onValueChange(date, dateString) {
     const setValue = dateString ? moment(dateString, 'YYYY-MM-DD') : null
@@ -24,7 +34,7 @@ const DateInput = props => {
   return (
     <Form.Item
       label={label}
-      validateStatus={fieldError && isTouched && "error"}
+      validateStatus={fieldError && isTouched && 'error'}
       help={isShowError ? fieldError : helperText}
     >
       <DatePicker

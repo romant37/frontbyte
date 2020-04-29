@@ -1,5 +1,3 @@
 import withAuthorizationPermissions from './withAuthorizationPermissions'
 
-export {
-  withAuthorizationPermissions,
-}
+export { withAuthorizationPermissions }

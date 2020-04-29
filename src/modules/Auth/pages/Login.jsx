@@ -18,7 +18,6 @@ const INITIAL_VALUES = {
 }
 
 const LoginPage = () => {
-  
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { loggedIn } = useSelector(({ auth }) => ({ loggedIn: auth.loggedIn }))
@@ -91,11 +90,11 @@ const LoginPage = () => {
   return (
     <div className={styles.root}>
       <Card title={t('common.appName')} className={styles.inner}>
-        {ErrorMessage &&
+        {ErrorMessage && (
           <div className={styles.error}>
             <Alert message={ErrorMessage} type='error' />
           </div>
-        }
+        )}
         <Formik
           validationSchema={VALIDATION_SCHEMA}
           initialValues={INITIAL_VALUES}

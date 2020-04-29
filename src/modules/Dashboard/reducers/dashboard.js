@@ -12,10 +12,8 @@ export const initialState = {
   summary: {},
 }
 
-
 export default (state = initialState, action) => {
   switch (action.type) {
-
     case DASHBOARD_GET_SUMMARY:
       return {
         ...state,

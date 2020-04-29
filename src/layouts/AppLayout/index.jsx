@@ -17,7 +17,6 @@ import styles from './styles.module.scss'
 const { Sider, Content } = Layout
 
 const AppLayout = ({ children }) => {
-
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [collapsed, setCollapsed] = useState(true)
@@ -41,10 +40,7 @@ const AppLayout = ({ children }) => {
         className={styles.sider}
       >
         <div className={styles.sidebarHead}>
-          <Button
-            type='primary'
-            onClick={toggle}
-          >
+          <Button type='primary' onClick={toggle}>
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </Button>
         </div>
@@ -72,14 +68,10 @@ const AppLayout = ({ children }) => {
             <span>{t('navigation.logout')}</span>
           </Menu.Item>
         </Menu>
-        <div className={styles.copy}>
-          {t('common.appName')} 2020
-        </div>
+        <div className={styles.copy}>{t('common.appName')} 2020</div>
       </Sider>
       <Layout>
-        <Content className={styles.content}>
-          {children}
-        </Content>
+        <Content className={styles.content}>{children}</Content>
       </Layout>
     </Layout>
   )

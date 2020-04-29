@@ -6,7 +6,6 @@ import styles from './styles.module.scss'
 const { Option } = Select
 
 const LanguageLayout = ({ children }) => {
-
   const { i18n } = useTranslation()
   const [lang, setLang] = useState('en')
 

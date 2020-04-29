@@ -1,7 +1,6 @@
 import { BaseAPI } from 'api'
 
 class DictionariesService extends BaseAPI {
-
   getNationalities() {
     return this.call({
       method: 'GET',
@@ -15,7 +14,6 @@ class DictionariesService extends BaseAPI {
       url: '/Data/ListRanks',
     })
   }
-
 }
 
 export default new DictionariesService()

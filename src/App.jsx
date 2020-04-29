@@ -12,7 +12,6 @@ const UsersList = lazy(() => import('modules/Users/pages/UsersList'))
 const UserDetails = lazy(() => import('modules/Users/pages/UserDetails'))
 
 const App = () => {
-
   const dispatch = useDispatch()
 
   // Keep token alive

@@ -2,7 +2,6 @@ import { BaseAPI } from 'api'
 import { AuthorizationUtils } from 'utils'
 
 class AuthService extends BaseAPI {
-
   login(data) {
     return this.call({
       method: 'POST',
@@ -26,7 +25,6 @@ class AuthService extends BaseAPI {
       url: `/Session/KeepAlive/${token}`,
     })
   }
-
 }
 
 export default new AuthService()

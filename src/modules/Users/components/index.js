@@ -1,5 +1,3 @@
 import EditUserForm from './EditUserForm'
 
-export {
-  EditUserForm,
-}
+export { EditUserForm }

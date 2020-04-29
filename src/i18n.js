@@ -4,14 +4,13 @@ import translationEng from './locales/en/translation.json'
 import translationRus from './locales/ru/translation.json'
 
 i18n.use(initReactI18next).init({
-
   resources: {
     en: {
-      translations: translationEng
+      translations: translationEng,
     },
     ru: {
-      translations: translationRus
-    }
+      translations: translationRus,
+    },
   },
 
   fallbackLng: 'en',
@@ -26,12 +25,12 @@ i18n.use(initReactI18next).init({
 
   interpolation: {
     escapeValue: false,
-    formatSeparator: ','
+    formatSeparator: ',',
   },
 
   react: {
-    wait: true
-  }
+    wait: true,
+  },
 })
 
 export default i18n

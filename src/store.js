@@ -1,5 +1,9 @@
 /* eslint no-underscore-dangle: "off" */
-import { applyMiddleware, compose, createStore as createReduxStore } from 'redux'
+import {
+  applyMiddleware,
+  compose,
+  createStore as createReduxStore,
+} from 'redux'
 import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
 import payloadMiddleware from './middlewares/payloadMiddleware'
@@ -8,11 +12,7 @@ import rootSaga from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
-const middleware = [
-  thunk,
-  sagaMiddleware,
-  payloadMiddleware,
-]
+const middleware = [thunk, sagaMiddleware, payloadMiddleware]
 
 let composeEnhancers = compose
 
@@ -25,9 +25,7 @@ if (process.env.NODE_ENV === 'development') {
 const configureStore = () => {
   const store = createReduxStore(
     reducers,
-    composeEnhancers(
-      applyMiddleware(...middleware),
-    ),
+    composeEnhancers(applyMiddleware(...middleware))
   )
 
   sagaMiddleware.run(rootSaga)

@@ -7,7 +7,7 @@ const axiosConfig = {
   baseURL: '/s10wer/Api',
   timeout: API_CALL_TIMEOUT,
   headers: {
-    'Accept': 'application/json;charset=UTF-8',
+    Accept: 'application/json;charset=UTF-8',
     'Content-Type': 'application/json;charset=UTF-8',
     'Access-Control-Allow-Origin': '*',
   },
@@ -23,7 +23,7 @@ API.interceptors.request.use(
     }
     return config
   },
-  error => Promise.reject(error),
+  error => Promise.reject(error)
 )
 
 // normalization for axios http-errors
@@ -47,7 +47,10 @@ const castError = error => {
 class BaseAPI {
   call({ data, method, url, params, headers, timeout, baseURL }) {
     const callParams = {
-      method, url, params, timeout,
+      method,
+      url,
+      params,
+      timeout,
       baseURL: baseURL || API.defaults.baseURL,
       headers: {
         ...API.defaults.headers,
@@ -55,8 +58,7 @@ class BaseAPI {
       },
       data,
     }
-    return API(callParams)
-    .catch(error => Promise.reject(castError(error)))
+    return API(callParams).catch(error => Promise.reject(castError(error)))
   }
 }
 

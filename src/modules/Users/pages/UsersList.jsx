@@ -8,7 +8,6 @@ import { getUsers } from 'modules/Users/reducers/usersList'
 import styles from './styles.module.scss'
 
 const UsersList = () => {
-
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { users, nationalities } = useSelector(({ usersList, dicts }) => ({
@@ -19,7 +18,7 @@ const UsersList = () => {
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch])
-  
+
   function onRow(record) {
     return {
       onClick: () => {

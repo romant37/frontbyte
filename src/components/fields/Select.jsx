@@ -2,10 +2,17 @@ import React from 'react'
 import { Form, Select } from 'antd'
 
 const SelectPicker = props => {
-
   const {
-    form, field, label, placeholder, disabled, items,
-    className, helperText, size, valueName,
+    form,
+    field,
+    label,
+    placeholder,
+    disabled,
+    items,
+    className,
+    helperText,
+    size,
+    valueName,
   } = props
   const fieldError = form.errors[field.name]
   const isTouched = form.touched[field.name]
@@ -45,9 +52,12 @@ const SelectPicker = props => {
         onBlur={onBlur}
       >
         <Select.Option value=''>{label || placeholder}</Select.Option>
-        {items && items.map(item => (
-          <Select.Option value={item.Id} key={item.Id}>{getValueMap(item)}</Select.Option>
-        ))}
+        {items &&
+          items.map(item => (
+            <Select.Option value={item.Id} key={item.Id}>
+              {getValueMap(item)}
+            </Select.Option>
+          ))}
       </Select>
     </Form.Item>
   )

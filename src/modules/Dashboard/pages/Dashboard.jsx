@@ -7,7 +7,6 @@ import { getSummary } from 'modules/Dashboard/reducers/dashboard'
 import styles from './styles.module.scss'
 
 const Dashboard = () => {
-
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const { summary } = useSelector(({ dashboard }) => ({
@@ -26,14 +25,8 @@ const Dashboard = () => {
     return (
       <Row gutter={24}>
         {Trainings.map(training => (
-          <Col
-            key={training.Name}
-            span={8}
-          >
-            <Card
-              title={training.Name}
-              className={styles.card}
-            >
+          <Col key={training.Name} span={8}>
+            <Card title={training.Name} className={styles.card}>
               <div className={styles.cardContent}>
                 <Progress
                   strokeColor={{

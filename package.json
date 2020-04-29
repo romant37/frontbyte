@@ -29,7 +29,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "prettier": "npx prettier --write '**/*.{js,jsx,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,9 +48,20 @@
     ]
   },
   "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.0",
     "node-sass": "^4.13.1",
+    "prettier": "2.0.5",
     "react-app-rewire-aliases": "^0.2.0",
     "react-app-rewired": "^2.1.5"
   },
-  "proxy": "http://89.206.0.43:8138"
+  "proxy": "http://89.206.0.43:8138",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "npx prettier --write"
+  }
 }

@@ -2,8 +2,18 @@ import React from 'react'
 import { Form, Input as InputComponent } from 'antd'
 
 const Input = props => {
-
-  const { form, field, type = 'text', label, icon, placeholder, disabled, className, helperText, size } = props
+  const {
+    form,
+    field,
+    type = 'text',
+    label,
+    icon,
+    placeholder,
+    disabled,
+    className,
+    helperText,
+    size,
+  } = props
   const fieldError = form.errors[field.name]
   const isTouched = form.touched[field.name]
   const isShowError = !!(fieldError && isTouched)
