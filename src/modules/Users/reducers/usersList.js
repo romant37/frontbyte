@@ -6,18 +6,18 @@ export const GET_USER_DETAILS = 'GET_USER_DETAILS'
 export const EDIT_USER_DETAILS = 'EDIT_USER_DETAILS'
 
 export const getUsers = () => ({
-  apiCall: () => UsersService.getUsers(),
-  type: GET_USERS_LIST
+  type: GET_USERS_LIST,
+  apiRequest: () => UsersService.getUsers(),
 })
 
 export const getUserDetails = id => ({
-  apiCall: () => UsersService.getUserDetails(id),
-  type: GET_USER_DETAILS
+  type: GET_USER_DETAILS,
+  apiRequest: () => UsersService.getUserDetails(id),
 })
 
 export const editUser = data => ({
-  apiCall: () => UsersService.editUser(data),
   type: EDIT_USER_DETAILS,
+  apiRequest: () => UsersService.editUser(data),
 })
 
 export const initialState = {

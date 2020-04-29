@@ -5,13 +5,13 @@ export const DICTIONARIES_GET_NATIONALITIES = 'DICTIONARIES_GET_NATIONALITIES'
 export const DICTIONARIES_GET_RANKS = 'DICTIONARIES_GET_RANKS'
 
 export const getNationalities = () => ({
-  apiCall: () => DictionariesService.getNationalities(),
-  type: DICTIONARIES_GET_NATIONALITIES
+  type: DICTIONARIES_GET_NATIONALITIES,
+  apiRequest: () => DictionariesService.getNationalities(),
 })
 
 export const getRanks = () => ({
-  apiCall: () => DictionariesService.getRanks(),
-  type: DICTIONARIES_GET_RANKS
+  type: DICTIONARIES_GET_RANKS,
+  apiRequest: () => DictionariesService.getRanks(),
 })
 
 export const initialState = {
