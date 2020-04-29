@@ -1,4 +1,3 @@
-import { AuthorizationUtils } from 'utils'
 import AuthService from 'modules/Auth/api/AuthService'
 
 export const SIGN_IN_USER = 'SIGN_IN_USER'
@@ -6,32 +5,24 @@ export const LOG_OUT_USER = 'LOG_OUT_USER'
 export const KEEP_ALIVE = 'KEEP_ALIVE'
 export const SESSION_IS_EXPIRED = 'SESSION_IS_EXPIRED'
 
-export const login = params => dispatch => {
-  dispatch({
-    apiCall: () => AuthService.login(params),
-    type: SIGN_IN_USER,
-  })
-  .then(response => {
-    const { Token } = response || {}
-    if (Token) {
-      AuthorizationUtils.storeSession(Token)
-    }
-  })
-}
+export const login = params => ({
+  type: SIGN_IN_USER,
+  apiRequest: () => AuthService.login(params),
+})
 
-export const logout = () => dispatch => {
-  dispatch({ apiCall: () => AuthService.logout(), type: LOG_OUT_USER })
-  dispatch(sessionIsExpired('Session expired'))
-  AuthorizationUtils.redirectToLoginForm()
-}
+export const logout = () => ({
+  type: LOG_OUT_USER,
+  apiRequest: () => AuthService.logout(),
+})
+
 export const keepAlive = () => ({
-  apiCall: () => AuthService.keepAlive(),
   type: KEEP_ALIVE,
+  apiRequest: () => AuthService.keepAlive(),
 })
 
 export const sessionIsExpired = error => ({
-  error,
   type: SESSION_IS_EXPIRED,
+  error,
 })
 
 export const initialState = {
@@ -42,14 +33,16 @@ export const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case SIGN_IN_USER:
+    case SIGN_IN_USER: {
+      const { data } = action.payload || {}
       return {
         ...state,
         loggedIn: {
-          ...action.payload.data,
+          ...data,
           ...action.result,
         },
       }
+    }
 
     case SESSION_IS_EXPIRED:
     case LOG_OUT_USER:

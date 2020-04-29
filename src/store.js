@@ -2,7 +2,6 @@
 import { applyMiddleware, compose, createStore as createReduxStore } from 'redux'
 import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
-import apiCallMiddleware from './middlewares/apiCallMiddleware'
 import payloadMiddleware from './middlewares/payloadMiddleware'
 import reducers from './reducers'
 import rootSaga from './sagas'
@@ -12,7 +11,6 @@ const sagaMiddleware = createSagaMiddleware()
 const middleware = [
   thunk,
   sagaMiddleware,
-  apiCallMiddleware,
   payloadMiddleware,
 ]
 

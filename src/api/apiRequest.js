@@ -27,6 +27,8 @@ export default function* apiRequest(action) {
         description: successMessage,
       })
     }
+
+    return data
 	} catch (error) {
     const { errorResult, status } = error || {}
     const { ErrorMessage } = errorResult || {}
@@ -38,5 +40,7 @@ export default function* apiRequest(action) {
         description: ErrorMessage,
       })
     }
+
+    return error
 	}
 }
