@@ -33,7 +33,7 @@ module.exports = function (plop) {
       {
         type: 'add',
         transform: prettier,
-        path: 'src/{{name}}/index.js',
+        path: 'src/{{name}}/index.ts',
         template: `
           export { default } from './{{fileName name}}'
         `,
@@ -41,12 +41,16 @@ module.exports = function (plop) {
       {
         type: 'add',
         transform: prettier,
-        path: 'src/{{name}}/{{componentName name}}.jsx',
+        path: 'src/{{name}}/{{componentName name}}.tsx',
         template: `
           import React from 'react'
           import styles from './{{componentName name}}.module.scss'
 
-          function {{componentName name}} ({ children }) {
+          interface I{{componentName name}}Props {
+            children: React.ReactNode
+          }
+
+          const {{componentName name}}: React.FC<I{{componentName name}}Props> = ({ children }) => {
             return <div className={styles.container}>{children}</div>
           }
 
@@ -56,7 +60,7 @@ module.exports = function (plop) {
       {
         type: 'add',
         transform: prettier,
-        path: 'src/{{name}}/{{componentName name}}.stories.jsx',
+        path: 'src/{{name}}/{{componentName name}}.stories.tsx',
         template: `
           import React from 'react'
           import {{componentName name}} from './{{componentName name}}'
@@ -73,7 +77,7 @@ module.exports = function (plop) {
       {
         type: 'add',
         transform: prettier,
-        path: 'src/{{name}}/{{componentName name}}.test.jsx',
+        path: 'src/{{name}}/{{componentName name}}.test.tsx',
         template: `
           import React from 'react'
           import renderer from 'react-test-renderer'
@@ -93,8 +97,7 @@ module.exports = function (plop) {
         path: 'src/{{name}}/{{componentName name}}.module.scss',
         template: `:local {
   .container {}
-}
-        `,
+}`,
       },
     ],
   })
