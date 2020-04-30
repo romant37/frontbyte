@@ -30,7 +30,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-app-rewired eject",
-    "prettier": "npx prettier --write '**/*.{js,jsx,ts,tsx}'"
+    "prettier": "npx prettier --write '**/*.{js,jsx,ts,tsx}'",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +50,11 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.18",
+    "@storybook/addon-links": "^5.3.18",
+    "@storybook/addons": "^5.3.18",
+    "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.18",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.0",
     "node-sass": "^4.13.1",
