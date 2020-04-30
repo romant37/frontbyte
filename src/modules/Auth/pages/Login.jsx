@@ -52,14 +52,14 @@ const LoginPage = () => {
           component={Input}
           name='Company'
           size='large'
-          icon={HomeOutlined}
+          icon={<HomeOutlined />}
           placeholder={t('login.company')}
         />
         <Field
           component={Input}
           name='User'
           size='large'
-          icon={UserOutlined}
+          icon={<UserOutlined />}
           placeholder={t('login.user')}
         />
         <Field
@@ -67,7 +67,7 @@ const LoginPage = () => {
           type='password'
           name='Password'
           size='large'
-          icon={LockOutlined}
+          icon={<LockOutlined />}
           placeholder={t('login.password')}
         />
         <Button
