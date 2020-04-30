@@ -1,7 +1,6 @@
 import React from 'react'
 import { Spin } from 'antd'
-
-import styles from './styles.module.scss'
+import styles from './Spinner.module.scss'
 
 function Spinner() {
   return (
