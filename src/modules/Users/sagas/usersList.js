@@ -1,5 +1,5 @@
 import { takeEvery } from 'redux-saga/effects'
-import apiRequest from 'api/apiRequest'
+import apiCall from 'api/apiCall'
 import {
   GET_USERS_LIST,
   GET_USER_DETAILS,
@@ -8,8 +8,8 @@ import {
 
 export default function* watcher() {
   yield [
-    yield takeEvery(GET_USERS_LIST, apiRequest),
-    yield takeEvery(GET_USER_DETAILS, apiRequest),
-    yield takeEvery(EDIT_USER_DETAILS, apiRequest),
+    yield takeEvery(GET_USERS_LIST, apiCall),
+    yield takeEvery(GET_USER_DETAILS, apiCall),
+    yield takeEvery(EDIT_USER_DETAILS, apiCall),
   ]
 }

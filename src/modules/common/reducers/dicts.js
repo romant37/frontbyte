@@ -6,12 +6,12 @@ export const DICTIONARIES_GET_RANKS = 'DICTIONARIES_GET_RANKS'
 
 export const getNationalities = () => ({
   type: DICTIONARIES_GET_NATIONALITIES,
-  apiRequest: () => DictionariesService.getNationalities(),
+  apiCall: () => DictionariesService.getNationalities(),
 })
 
 export const getRanks = () => ({
   type: DICTIONARIES_GET_RANKS,
-  apiRequest: () => DictionariesService.getRanks(),
+  apiCall: () => DictionariesService.getRanks(),
 })
 
 export const initialState = {

@@ -7,17 +7,17 @@ export const SESSION_IS_EXPIRED = 'SESSION_IS_EXPIRED'
 
 export const login = params => ({
   type: SIGN_IN_USER,
-  apiRequest: () => AuthService.login(params),
+  apiCall: () => AuthService.login(params),
 })
 
 export const logout = () => ({
   type: LOG_OUT_USER,
-  apiRequest: () => AuthService.logout(),
+  apiCall: () => AuthService.logout(),
 })
 
 export const keepAlive = () => ({
   type: KEEP_ALIVE,
-  apiRequest: () => AuthService.keepAlive(),
+  apiCall: () => AuthService.keepAlive(),
 })
 
 export const sessionIsExpired = error => ({

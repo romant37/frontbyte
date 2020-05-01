@@ -7,17 +7,17 @@ export const EDIT_USER_DETAILS = 'EDIT_USER_DETAILS'
 
 export const getUsers = () => ({
   type: GET_USERS_LIST,
-  apiRequest: () => UsersService.getUsers(),
+  apiCall: () => UsersService.getUsers(),
 })
 
 export const getUserDetails = id => ({
   type: GET_USER_DETAILS,
-  apiRequest: () => UsersService.getUserDetails(id),
+  apiCall: () => UsersService.getUserDetails(id),
 })
 
 export const editUser = data => ({
   type: EDIT_USER_DETAILS,
-  apiRequest: () => UsersService.editUser(data),
+  apiCall: () => UsersService.editUser(data),
 })
 
 export const initialState = {

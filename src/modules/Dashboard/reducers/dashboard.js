@@ -5,7 +5,7 @@ export const DASHBOARD_GET_SUMMARY = 'DASHBOARD_GET_SUMMARY'
 
 export const getSummary = () => ({
   type: DASHBOARD_GET_SUMMARY,
-  apiRequest: () => DashboardService.getSummary(),
+  apiCall: () => DashboardService.getSummary(),
 })
 
 export const initialState = {

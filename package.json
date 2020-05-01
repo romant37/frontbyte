@@ -38,7 +38,8 @@
     "prettier": "npx prettier --write '**/*.{js,jsx,ts,tsx}'",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "generate": "plop"
+    "generate": "plop",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -69,7 +70,8 @@
     "prettier-eslint": "^9.0.1",
     "react-app-rewire-aliases": "^0.2.0",
     "react-app-rewired": "^2.1.5",
-    "react-test-renderer": "^16.13.1"
+    "react-test-renderer": "^16.13.1",
+    "source-map-explorer": "^2.4.2"
   },
   "proxy": "http://89.206.0.43:8138",
   "husky": {

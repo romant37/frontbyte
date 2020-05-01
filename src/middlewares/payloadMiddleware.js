@@ -1,6 +1,6 @@
 import { endsWith, isArray } from 'lodash'
 import { AuthorizationUtils } from 'utils'
-import { REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE } from 'api/apiRequest'
+import { REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE } from 'api/apiCall'
 import { sessionIsExpired } from 'modules/Auth/reducers/auth'
 
 const defaultPayload = {

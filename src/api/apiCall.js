@@ -5,17 +5,17 @@ export const REQUEST_TYPE = '_STARTED'
 export const SUCCESS_TYPE = '_SUCCESS'
 export const FAILURE_TYPE = '_FAILURE'
 
-export default function* apiRequest(action) {
+export default function* apiCall(action) {
   const {
     type,
     subtype,
-    apiRequest,
+    apiCall,
     successMessage,
     params,
     enableShowErrorMessage,
   } = action
 
-  if (subtype || !apiRequest) return null
+  if (subtype || !apiCall) return null
 
   const requestType = `${type}${REQUEST_TYPE}`
   const successType = `${type}${SUCCESS_TYPE}`
@@ -24,7 +24,7 @@ export default function* apiRequest(action) {
   yield put({ type, subtype: requestType, payload: {}, params })
 
   try {
-    const { data } = yield call(apiRequest)
+    const { data } = yield call(apiCall)
     yield put({ type, subtype: successType, payload: { data } })
 
     if (successMessage) {
