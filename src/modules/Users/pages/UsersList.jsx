@@ -52,7 +52,7 @@ const UsersList = () => {
       render: id => {
         return (
           <Tag color='geekblue' key={id}>
-            {DictionariesUtils.getLocalizedName(nationalities.data, id)}
+            {DictionariesUtils.getLocalizedName(nationalities, id)}
           </Tag>
         )
       },

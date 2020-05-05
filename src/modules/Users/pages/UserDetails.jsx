@@ -54,15 +54,12 @@ const UserDetails = () => {
         </Descriptions.Item>
         <Descriptions.Item label={t('users.nationality')}>
           <Tag color='geekblue' key={Nationality}>
-            {DictionariesUtils.getLocalizedName(
-              nationalities.data,
-              Nationality
-            )}
+            {DictionariesUtils.getLocalizedName(nationalities, Nationality)}
           </Tag>
         </Descriptions.Item>
         <Descriptions.Item label={t('users.rank')}>
           <Tag color='green' key={Rank}>
-            {DictionariesUtils.getLocalizedName(ranks.data, Rank)}
+            {DictionariesUtils.getLocalizedName(ranks, Rank)}
           </Tag>
         </Descriptions.Item>
         <Descriptions.Item label={t('users.address')}>
