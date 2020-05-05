@@ -1,8 +1,9 @@
 import { BaseAPI } from 'api'
 import { AuthorizationUtils } from 'utils'
+import { LoginParamsType } from '../types'
 
 class AuthService extends BaseAPI {
-  login(data) {
+  login(data: LoginParamsType) {
     return this.call({
       method: 'POST',
       url: '/Session/Logon',

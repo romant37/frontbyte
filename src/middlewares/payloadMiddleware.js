@@ -1,4 +1,4 @@
-import { endsWith, isArray } from 'lodash'
+import { endsWith } from 'lodash'
 import { AuthorizationUtils } from 'utils'
 import { REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE } from 'api/apiCall'
 import { sessionIsExpired } from 'modules/Auth/reducers/auth'
@@ -9,14 +9,14 @@ const defaultPayload = {
 }
 
 const payloadMiddleware = ({ dispatch }) => next => action => {
-  const { result, error, params } = action.payload || {}
+  const { error } = action.payload || {}
 
   if (error) {
-    const { ErrorCode, status } = error
+    const { ErrorCode, ResponseStatusCode } = error
     if (
       ErrorCode === 'InvalidSessionToken' ||
       ErrorCode === 'MissingSessionIdentifier' ||
-      status === 401
+      ResponseStatusCode === 401
     ) {
       AuthorizationUtils.redirectToLoginForm()
       dispatch(sessionIsExpired('Session expired'))
@@ -37,20 +37,12 @@ const payloadMiddleware = ({ dispatch }) => next => action => {
     action.result = {
       ...defaultPayload,
       error,
-      params,
     }
   }
+
   if (endsWith(action.subtype, SUCCESS_TYPE)) {
-    if (isArray(action.payload.result)) {
-      action.result = {
-        ...defaultPayload,
-        data: action.payload.result,
-      }
-    } else {
-      action.result = {
-        ...result,
-        ...defaultPayload,
-      }
+    action.result = {
+      ...defaultPayload,
     }
   }
 

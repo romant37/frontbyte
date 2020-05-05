@@ -1,5 +1,5 @@
 import DashboardService from 'modules/Dashboard/api/DashboardService'
-import { SESSION_IS_EXPIRED } from 'modules/Auth/reducers/auth'
+import { SESSION_IS_EXPIRED } from 'types'
 
 export const DASHBOARD_GET_SUMMARY = 'DASHBOARD_GET_SUMMARY'
 

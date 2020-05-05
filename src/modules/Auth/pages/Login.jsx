@@ -12,9 +12,9 @@ import { login } from 'modules/Auth/reducers/auth'
 import styles from './styles.module.scss'
 
 const INITIAL_VALUES = {
-  User: '',
-  Company: '',
-  Password: '',
+  Company: 'DemoCompany',
+  User: 'Admin',
+  Password: 'Demo2020',
 }
 
 const LoginPage = () => {
@@ -25,7 +25,7 @@ const LoginPage = () => {
   const prevLoggedIn = usePrevious(loggedIn) || {}
 
   const VALIDATION_SCHEMA = yup.object().shape({
-    User: yup.string().required(t('common.required')),
+    User: yup.string(), // .required(t('common.required'))
     Password: yup.string().required(t('common.required')),
     Company: yup.string().required(t('common.required')),
   })

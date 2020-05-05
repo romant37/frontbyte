@@ -11,7 +11,6 @@ export default function* apiCall(action) {
     subtype,
     apiCall,
     successMessage,
-    params,
     enableShowErrorMessage,
   } = action
 
@@ -21,7 +20,7 @@ export default function* apiCall(action) {
   const successType = `${type}${SUCCESS_TYPE}`
   const failureType = `${type}${FAILURE_TYPE}`
 
-  yield put({ type, subtype: requestType, payload: {}, params })
+  yield put({ type, subtype: requestType, payload: {} })
 
   try {
     const { data } = yield call(apiCall)
@@ -36,16 +35,16 @@ export default function* apiCall(action) {
 
     return data
   } catch (error) {
-    const { errorResult, status } = error || {}
+    // { errorResult, responseStatusCode, responseStatusText }
+    const { errorResult, responseStatusCode } = error || {}
     const { ErrorMessage } = errorResult || {}
     yield put({
       type,
       subtype: failureType,
-      payload: { error: { ...errorResult, status } },
-      params,
+      payload: { error: { ...errorResult, responseStatusCode } },
     })
 
-    if (enableShowErrorMessage) {
+    if (enableShowErrorMessage && ErrorMessage) {
       notification['error']({
         message: 'Error',
         description: ErrorMessage,
