@@ -1,3 +1,4 @@
+import produce from 'immer'
 import UsersService from 'modules/Users/api/UsersService'
 import { SESSION_IS_EXPIRED } from 'modules/Auth/reducers/auth'
 
@@ -26,36 +27,26 @@ export const initialState = {
   userEdit: {},
 }
 
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default produce((draft, action) => {
+  const { type, result = {} } = action
+  switch (type) {
     case GET_USERS_LIST:
-      return {
-        ...state,
-        users: {
-          ...action.result,
-        },
-      }
+      draft.users = result
+      break
 
     case GET_USER_DETAILS:
-      return {
-        ...state,
-        userDetails: {
-          ...action.result,
-        },
-      }
+      draft.userDetails = result
+      break
 
     case EDIT_USER_DETAILS:
-      return {
-        ...state,
-        userEdit: {
-          ...action.result,
-        },
-      }
+      draft.userEdit = result
+      break
 
     case SESSION_IS_EXPIRED:
-      return { ...initialState }
+      draft = initialState
+      break
 
     default:
-      return state
+      return draft
   }
-}
+}, initialState)

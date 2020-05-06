@@ -1,3 +1,4 @@
+import produce from 'immer'
 import AuthService from 'modules/Auth/api/AuthService'
 
 export const SIGN_IN_USER = 'SIGN_IN_USER'
@@ -29,25 +30,19 @@ export const initialState = {
   loggedIn: {},
 }
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case SIGN_IN_USER: {
-      const { data } = action.payload || {}
-      return {
-        ...state,
-        loggedIn: {
-          ...data,
-          ...action.result,
-        },
-      }
-    }
+export default produce((draft, action) => {
+  const { type, result = {} } = action
+  switch (type) {
+    case SIGN_IN_USER:
+      draft.loggedIn = result
+      break
 
     case SESSION_IS_EXPIRED:
     case LOG_OUT_USER:
-      return { ...initialState }
+      draft = initialState
+      break
 
-    case KEEP_ALIVE:
     default:
-      return state
+      return draft
   }
-}
+}, initialState)
