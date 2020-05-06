@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { API_CALL_ALL } from 'api/apiCall'
 import DictionariesService from 'modules/common/api/DictionariesService'
 import { SESSION_IS_EXPIRED } from 'modules/Auth/reducers/auth'
@@ -20,21 +21,24 @@ export const initialState = {
   ranks: [],
 }
 
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default produce((draft, action) => {
+  const { type, result = {} } = action
+  switch (type) {
     case DICTIONARIES_GET: {
-      const { data = {}, ...rest } = action.result || {}
-      return {
-        ...state,
-        ...rest,
-        ...data,
-      }
+      const { data = {}, isLoading, error } = result
+      const { nationalities, ranks } = data
+      draft.isLoading = isLoading
+      draft.error = error
+      draft.ranks = ranks
+      draft.nationalities = nationalities
+      break
     }
 
     case SESSION_IS_EXPIRED:
-      return { ...initialState }
+      draft = initialState
+      break
 
     default:
-      return state
+      return draft
   }
-}
+}, initialState)

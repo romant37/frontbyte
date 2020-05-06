@@ -1,3 +1,4 @@
+import produce from 'immer'
 import DashboardService from 'modules/Dashboard/api/DashboardService'
 import { SESSION_IS_EXPIRED } from 'modules/Auth/reducers/auth'
 
@@ -12,20 +13,18 @@ export const initialState = {
   summary: {},
 }
 
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default produce((draft, action) => {
+  const { type, result = {} } = action
+  switch (type) {
     case DASHBOARD_GET_SUMMARY:
-      return {
-        ...state,
-        summary: {
-          ...action.result,
-        },
-      }
+      draft.summary = result
+      break
 
     case SESSION_IS_EXPIRED:
-      return { ...initialState }
+      draft = initialState
+      break
 
     default:
-      return state
+      return draft
   }
-}
+}, initialState)
