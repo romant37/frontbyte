@@ -12,9 +12,9 @@ import { login } from 'modules/Auth/reducers/auth'
 import styles from './styles.module.scss'
 
 const INITIAL_VALUES = {
-  User: '',
-  Company: '',
-  Password: '',
+  User: 'Admin',
+  Company: 'DemoCompany',
+  Password: 'Demo2020',
 }
 
 const LoginPage = () => {

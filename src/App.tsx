@@ -1,8 +1,9 @@
-import React, { useEffect, Suspense, lazy } from 'react'
+import React, { useEffect, Suspense, lazy, FC } from 'react'
 import { useDispatch } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { AuthorizationUtils } from 'utils'
 import { AppLayout } from 'layouts'
+import { AppLayoutSegmentProps } from 'layouts/layout.contract'
 import { Spinner } from 'components/common'
 import { keepAlive } from 'modules/Auth/reducers/auth'
 import { getDictionaries } from 'modules/common/reducers/dicts'
@@ -10,6 +11,7 @@ import { getDictionaries } from 'modules/common/reducers/dicts'
 const Dashboard = lazy(() => import('modules/Dashboard/pages/Dashboard'))
 const UsersList = lazy(() => import('modules/Users/pages/UsersList'))
 const UserDetails = lazy(() => import('modules/Users/pages/UserDetails'))
+const Test = lazy(() => import('modules/Test'))
 
 const App = () => {
   const dispatch = useDispatch()
@@ -30,16 +32,21 @@ const App = () => {
     }
   }, [dispatch])
 
+  const Content: FC<AppLayoutSegmentProps> = () => (
+    <Suspense fallback={<Spinner />}>
+      <Switch>
+        <Route exact path='/dashboard' component={Dashboard} />
+        <Route exact path='/users/:id' component={UserDetails} />
+        <Route exact path='/users' component={UsersList} />
+        <Route exact path='/test' component={Test} />
+        <Redirect path='*' to='/dashboard' />
+      </Switch>
+    </Suspense>
+  )
+
   return (
     <AppLayout>
-      <Suspense fallback={<Spinner />}>
-        <Switch>
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/users/:id' component={UserDetails} />
-          <Route exact path='/users' component={UsersList} />
-          <Redirect path='*' to='/dashboard' />
-        </Switch>
-      </Suspense>
+      <Content segmentId='content' />
     </AppLayout>
   )
 }

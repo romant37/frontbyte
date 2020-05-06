@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react'
 import { Provider } from 'react-redux'
 import { Router, Switch, Route } from 'react-router-dom'
+import { GridThemeProvider } from 'styled-bootstrap-grid'
+import { gridTheme } from 'grids'
 import { history } from 'utils'
 import { LanguageLayout } from 'layouts'
 import { Spinner } from 'components/common'
@@ -18,18 +20,20 @@ const Root = () => {
   return (
     <Provider store={store}>
       <LanguageLayout>
-        <Router history={history}>
-          <Suspense fallback={<Spinner />}>
-            <Switch>
-              <Route
-                exact
-                path='/login'
-                component={withAuthorizationPermissions(Login)}
-              />
-              <Route path='/' component={App} />
-            </Switch>
-          </Suspense>
-        </Router>
+        <GridThemeProvider gridTheme={gridTheme}>
+          <Router history={history}>
+            <Suspense fallback={<Spinner />}>
+              <Switch>
+                <Route
+                  exact
+                  path='/login'
+                  component={withAuthorizationPermissions(Login)}
+                />
+                <Route path='/' component={App} />
+              </Switch>
+            </Suspense>
+          </Router>
+        </GridThemeProvider>
       </LanguageLayout>
     </Provider>
   )

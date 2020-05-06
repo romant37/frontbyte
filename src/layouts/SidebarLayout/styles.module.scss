@@ -1,0 +1,46 @@
+// .root {
+//   height: 100%;
+
+  // .header {
+  //   position: relative;
+  //   z-index: 2;
+  //   background: #fff;
+  //   padding: 0;
+  //   box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  // }
+
+.sider {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .sidebarHead {
+    flex-shrink: 0;
+    height: 32px;
+    margin: 16px;
+    color: #fff;
+  }
+
+  .menu {
+    flex: 1 0;
+    overflow-y: auto;
+  }
+
+  .divider {
+    background: rgba(255, 255, 255, .1) !important;
+  }
+
+  .copy {
+    flex-shrink: 0;
+    text-align: center;
+    margin: 16px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.45);
+  }
+}
