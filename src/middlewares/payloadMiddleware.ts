@@ -1,14 +1,18 @@
+import { MiddlewareAPI, Dispatch } from 'redux'
 import { endsWith } from 'lodash'
 import { AuthorizationUtils } from 'utils'
 import { REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE } from 'api/apiCall'
+import { APIActionType } from 'api/types'
 import { sessionIsExpired } from 'modules/Auth/reducers/auth'
 
-const defaultPayload = {
+const DEFAULT_PAYLOAD = {
   isLoading: false,
   error: null,
 }
 
-const payloadMiddleware = ({ dispatch }) => next => action => {
+const payloadMiddleware = ({ dispatch }: MiddlewareAPI) => (next: Dispatch) => (
+  action: APIActionType
+) => {
   const { error, data = {} } = action.payload || {}
 
   if (error) {
@@ -29,14 +33,14 @@ const payloadMiddleware = ({ dispatch }) => next => action => {
 
   if (endsWith(action.subtype, REQUEST_TYPE)) {
     action.result = {
-      ...defaultPayload,
+      ...DEFAULT_PAYLOAD,
       isLoading: true,
     }
   }
 
   if (endsWith(action.subtype, FAILURE_TYPE)) {
     action.result = {
-      ...defaultPayload,
+      ...DEFAULT_PAYLOAD,
       error,
     }
   }
@@ -44,7 +48,7 @@ const payloadMiddleware = ({ dispatch }) => next => action => {
   if (endsWith(action.subtype, SUCCESS_TYPE)) {
     action.result = {
       data,
-      ...defaultPayload,
+      ...DEFAULT_PAYLOAD,
     }
   }
 
