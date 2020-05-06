@@ -1,9 +1,12 @@
-import { call, put } from 'redux-saga/effects'
-import { notification } from 'antd'
+import { call, put, all } from 'redux-saga/effects'
 
+// Subtypes
 export const REQUEST_TYPE = '_STARTED'
 export const SUCCESS_TYPE = '_SUCCESS'
 export const FAILURE_TYPE = '_FAILURE'
+
+// API call types
+export const API_CALL_ALL = 'API_CALL_ALL'
 
 export default function* apiCall(action) {
   const {
@@ -11,7 +14,6 @@ export default function* apiCall(action) {
     subtype,
     apiCall,
     successMessage,
-    params,
     enableShowErrorMessage,
   } = action
 
@@ -21,17 +23,37 @@ export default function* apiCall(action) {
   const successType = `${type}${SUCCESS_TYPE}`
   const failureType = `${type}${FAILURE_TYPE}`
 
-  yield put({ type, subtype: requestType, payload: {}, params })
+  yield put({ type, subtype: requestType, payload: {} })
 
   try {
+    if (typeof apiCall === 'object') {
+      const { option, request } = apiCall
+      // Promise.all API calls
+      if (option === API_CALL_ALL) {
+        const apiKeys = Object.keys(request)
+        const apiValues = Object.values(request)
+        const result = yield all(apiValues.map(value => call(value)))
+        let payload = {}
+
+        result.forEach(({ data }, index) => {
+          payload[apiKeys[index]] = data
+        })
+
+        yield put({ type, subtype: successType, payload: { data: payload } })
+
+        return payload
+      }
+    }
+
+    // Single API call
     const { data } = yield call(apiCall)
     yield put({ type, subtype: successType, payload: { data } })
 
     if (successMessage) {
-      notification['success']({
-        message: 'Success',
-        description: successMessage,
-      })
+      // TODO: Add some UI Notification
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Success: ', successMessage)
+      }
     }
 
     return data
@@ -42,14 +64,13 @@ export default function* apiCall(action) {
       type,
       subtype: failureType,
       payload: { error: { ...errorResult, status } },
-      params,
     })
 
     if (enableShowErrorMessage) {
-      notification['error']({
-        message: 'Error',
-        description: ErrorMessage,
-      })
+      // TODO: Add some UI Notification
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error: ', ErrorMessage)
+      }
     }
 
     return error

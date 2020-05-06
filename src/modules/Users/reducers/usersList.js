@@ -32,7 +32,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: {
-          ...action.payload,
           ...action.result,
         },
       }
@@ -41,7 +40,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userDetails: {
-          ...action.payload,
           ...action.result,
         },
       }
@@ -50,7 +48,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userEdit: {
-          ...action.payload,
           ...action.result,
         },
       }

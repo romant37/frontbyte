@@ -5,7 +5,7 @@ import { AuthorizationUtils } from 'utils'
 import { AppLayout } from 'layouts'
 import { Spinner } from 'components/common'
 import { keepAlive } from 'modules/Auth/reducers/auth'
-import { getNationalities, getRanks } from 'modules/common/reducers/dicts'
+import { getDictionaries } from 'modules/common/reducers/dicts'
 
 const Dashboard = lazy(() => import('modules/Dashboard/pages/Dashboard'))
 const UsersList = lazy(() => import('modules/Users/pages/UsersList'))
@@ -24,8 +24,7 @@ const App = () => {
     const token = AuthorizationUtils.getSessionToken()
     if (token) {
       // Prepare required data
-      dispatch(getNationalities())
-      dispatch(getRanks())
+      dispatch(getDictionaries())
     } else {
       AuthorizationUtils.redirectToLoginForm()
     }

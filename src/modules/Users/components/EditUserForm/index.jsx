@@ -88,14 +88,14 @@ const EditUserForm = props => {
           component={Select}
           name='Nationality'
           valueName='Name'
-          items={nationalities.data}
+          items={nationalities}
           placeholder={t('users.nationality')}
         />
         <Field
           component={Select}
           name='Rank'
           valueName='Name'
-          items={ranks.data}
+          items={ranks}
           placeholder={t('users.rank')}
         />
         <Button

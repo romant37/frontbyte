@@ -18,7 +18,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         summary: {
-          ...action.payload,
           ...action.result,
         },
       }
