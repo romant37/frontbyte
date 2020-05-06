@@ -1,6 +1,6 @@
 import { call, put, all } from 'redux-saga/effects'
 import { AxiosResponse } from 'axios'
-import { APIActionType } from './types'
+import { ActionType } from 'types'
 
 // Subtypes
 export const REQUEST_TYPE = '_STARTED'
@@ -14,7 +14,7 @@ type ApiCallAllPayloadType = {
   [key: string]: any
 }
 
-export default function* apiCall(action: APIActionType) {
+export default function* apiCall(action: ActionType) {
   const {
     type,
     subtype,

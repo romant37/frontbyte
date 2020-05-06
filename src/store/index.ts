@@ -5,9 +5,9 @@ import {
   createStore as createReduxStore,
 } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import payloadMiddleware from './middlewares/payloadMiddleware'
-import reducers from './reducers'
-import rootSaga from './sagas'
+import payloadMiddleware from 'middlewares/payloadMiddleware'
+import rootReducer from './rootReducer'
+import rootSaga from './rootSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -25,15 +25,15 @@ if (process.env.NODE_ENV === 'development') {
 
 const configureStore = () => {
   const store = createReduxStore(
-    reducers,
+    rootReducer,
     composeEnhancers(applyMiddleware(...middleware))
   )
 
   sagaMiddleware.run(rootSaga)
 
   if (process.env.NODE_ENV !== 'production' && module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(reducers)
+    module.hot.accept('./rootReducer', () => {
+      store.replaceReducer(rootReducer)
     })
   }
 
@@ -43,5 +43,7 @@ const configureStore = () => {
 
   return store
 }
+
+export type RootState = ReturnType<typeof rootReducer>
 
 export default configureStore

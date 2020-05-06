@@ -23,7 +23,7 @@ export const keepAlive = () => ({
 
 export const sessionIsExpired = error => ({
   type: SESSION_IS_EXPIRED,
-  error,
+  payload: error,
 })
 
 export const initialState = {
@@ -39,8 +39,7 @@ export default produce((draft, action) => {
 
     case SESSION_IS_EXPIRED:
     case LOG_OUT_USER:
-      draft = initialState
-      break
+      return initialState
 
     default:
       return draft
