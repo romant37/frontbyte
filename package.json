@@ -62,6 +62,8 @@
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-create-react-app": "^2.1.1",
     "@storybook/react": "^5.3.18",
+    "babel-plugin-react-remove-properties": "^0.3.0",
+    "customize-cra": "^0.9.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.0",
     "node-sass": "^4.13.1",
