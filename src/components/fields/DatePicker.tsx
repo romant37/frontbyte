@@ -1,9 +1,20 @@
 import React from 'react'
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 import { useTranslation } from 'react-i18next'
 import { Form, DatePicker } from 'antd'
+import { FieldProps } from 'formik'
+import { SizeType } from 'antd/lib/config-provider/SizeContext'
 
-const DateInput = props => {
+interface IDateInputProps extends FieldProps {
+  label?: string
+  placeholder?: string
+  className?: string
+  helperText?: string
+  size?: SizeType
+  disabled?: boolean
+}
+
+const DateInput = (props: IDateInputProps) => {
   const { t } = useTranslation()
   const {
     form,
@@ -22,7 +33,7 @@ const DateInput = props => {
     ? moment(new Date(field.value), 'YYYY-MM-DD')
     : null
 
-  function onValueChange(date, dateString) {
+  function onValueChange(date: Moment | null, dateString: string) {
     const setValue = dateString ? moment(dateString, 'YYYY-MM-DD') : null
     form.setFieldValue(field.name, setValue)
   }
@@ -34,7 +45,7 @@ const DateInput = props => {
   return (
     <Form.Item
       label={label}
-      validateStatus={fieldError && isTouched && 'error'}
+      validateStatus={(fieldError && isTouched && 'error') || ''}
       help={isShowError ? fieldError : helperText}
     >
       <DatePicker
@@ -44,10 +55,6 @@ const DateInput = props => {
         size={size || 'large'}
         placeholder={placeholder || t('common.datePicker.select')}
         disabled={disabled}
-        autoComplete='off'
-        autoCapitalize='off'
-        spellCheck='false'
-        autoCorrect='off'
         style={{ width: '100%' }}
         onChange={onValueChange}
         onBlur={onBlur}

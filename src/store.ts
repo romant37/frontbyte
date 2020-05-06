@@ -16,8 +16,10 @@ const middleware = [sagaMiddleware, payloadMiddleware]
 let composeEnhancers = compose
 
 if (process.env.NODE_ENV === 'development') {
-  if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
-    composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  if (
+    typeof (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function'
+  ) {
+    composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   }
 }
 
@@ -36,7 +38,7 @@ const configureStore = () => {
   }
 
   if (process.env.NODE_ENV === 'development') {
-    window.store = store
+    ;(window as any).store = store
   }
 
   return store

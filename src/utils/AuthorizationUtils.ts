@@ -5,7 +5,7 @@ export const USER_AUTH = 'USER_AUTH'
 const ANONYMOUS_API_METHODS = ['/Logon', '/Logout']
 
 class AuthorizationUtils {
-  storeSession(token) {
+  storeSession(token: string) {
     localStorage.setItem(USER_AUTH, token)
   }
 
@@ -38,7 +38,8 @@ class AuthorizationUtils {
     }
   }
 
-  isAnonymousApiMethod(url) {
+  isAnonymousApiMethod(url: string | undefined) {
+    if (!url) return false
     return ANONYMOUS_API_METHODS.some(path => path.includes(url))
   }
 }

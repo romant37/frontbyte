@@ -13,9 +13,9 @@ i18n.use(initReactI18next).init({
     },
   },
 
-  fallbackLng: 'en',
-  debug: true,
   initImmediate: false,
+  fallbackLng: 'en',
+  lng: 'en',
   preload: ['en', 'ru'],
 
   ns: ['translations'],
@@ -30,6 +30,7 @@ i18n.use(initReactI18next).init({
 
   react: {
     wait: true,
+    bindI18n: 'languageChanged',
   },
 })
 

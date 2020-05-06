@@ -1,4 +1,5 @@
 import { call, put, all } from 'redux-saga/effects'
+import { AxiosResponse } from 'axios'
 import { APIActionType } from './types'
 
 // Subtypes
@@ -40,7 +41,7 @@ export default function* apiCall(action: APIActionType) {
         const result = yield all(apiValues.map((value: any) => call(value)))
         let payload: ApiCallAllPayloadType = {}
 
-        result.forEach(({ data }: any, index: number) => {
+        result.forEach(({ data }: AxiosResponse, index: number) => {
           payload[apiKeys[index]] = data
         })
 
@@ -51,7 +52,7 @@ export default function* apiCall(action: APIActionType) {
     }
 
     // Single API call
-    const { data } = yield call(apiCall)
+    const { data }: AxiosResponse = yield call(apiCall)
     yield put({ type, subtype: successType, payload: { data } })
 
     if (successMessage) {
