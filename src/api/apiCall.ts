@@ -1,4 +1,5 @@
 import { call, put, all } from 'redux-saga/effects'
+import { APIActionType } from './types'
 
 // Subtypes
 export const REQUEST_TYPE = '_STARTED'
@@ -8,7 +9,11 @@ export const FAILURE_TYPE = '_FAILURE'
 // API call types
 export const API_CALL_ALL = 'API_CALL_ALL'
 
-export default function* apiCall(action) {
+type ApiCallAllPayloadType = {
+  [key: string]: any
+}
+
+export default function* apiCall(action: APIActionType) {
   const {
     type,
     subtype,
@@ -32,10 +37,10 @@ export default function* apiCall(action) {
       if (option === API_CALL_ALL) {
         const apiKeys = Object.keys(request)
         const apiValues = Object.values(request)
-        const result = yield all(apiValues.map(value => call(value)))
-        let payload = {}
+        const result = yield all(apiValues.map((value: any) => call(value)))
+        let payload: ApiCallAllPayloadType = {}
 
-        result.forEach(({ data }, index) => {
+        result.forEach(({ data }: any, index: number) => {
           payload[apiKeys[index]] = data
         })
 
