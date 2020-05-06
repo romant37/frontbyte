@@ -55,7 +55,7 @@ const EditUserForm = props => {
     const { DateOfBirth, ...rest } = values
     const requestData = {
       ...rest,
-      DateOfBirth: format(DateOfBirth, 'DD-MM-YYYY') || null,
+      DateOfBirth: format(new Date(DateOfBirth), 'dd-MM-yyyy') || null,
     }
     setFormBag(formikBag)
     dispatch(editUser(requestData))

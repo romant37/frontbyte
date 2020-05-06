@@ -1,9 +1,9 @@
-import axios from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios'
 import { AuthorizationUtils } from 'utils'
 
 const API_CALL_TIMEOUT = 30000
 
-const axiosConfig = {
+const axiosConfig: AxiosRequestConfig = {
   baseURL: '/s10wer/Api',
   timeout: API_CALL_TIMEOUT,
   headers: {
@@ -13,10 +13,10 @@ const axiosConfig = {
   },
 }
 
-const API = axios.create(axiosConfig)
+const API: AxiosInstance = axios.create(axiosConfig)
 
 API.interceptors.request.use(
-  config => {
+  (config: AxiosRequestConfig) => {
     const token = AuthorizationUtils.getSessionToken()
     if (token && !AuthorizationUtils.isAnonymousApiMethod(config.url)) {
       config.headers.SessionToken = token
@@ -27,7 +27,7 @@ API.interceptors.request.use(
 )
 
 // normalization for axios http-errors
-const castError = error => {
+const castError = (error: AxiosError) => {
   const { response } = error
   const errorResult = response ? response.data : error
   const status = response ? response.status : error.code
@@ -45,7 +45,15 @@ const castError = error => {
 }
 
 class BaseAPI {
-  call({ data, method, url, params, headers, timeout, baseURL }) {
+  call({
+    data,
+    method,
+    url,
+    params,
+    headers,
+    timeout,
+    baseURL,
+  }: AxiosRequestConfig) {
     const callParams = {
       method,
       url,

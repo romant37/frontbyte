@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -16,7 +16,11 @@ import styles from './styles.module.scss'
 
 const { Sider, Content } = Layout
 
-const AppLayout = ({ children }) => {
+interface IAppLayoutProps {
+  children: React.ReactNode
+}
+
+const AppLayout: FC<IAppLayoutProps> = ({ children }) => {
   const dispatch = useDispatch()
   const { t } = useTranslation()
   const [collapsed, setCollapsed] = useState(true)
