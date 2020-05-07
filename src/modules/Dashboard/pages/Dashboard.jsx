@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Card, Progress, Col, Row } from 'antd'
+import { Card, Progress } from 'antd'
+import { Row, Col } from 'styled-bootstrap-grid'
 import { PageLayout } from 'layouts'
+import { MainGridLayout } from 'layouts'
+// import { MainGridLayoutSegmentProps } from 'layouts/layout.contract'
 import { getSummary } from 'modules/Dashboard/reducers/dashboard'
 import styles from './styles.module.scss'
 
@@ -21,11 +24,10 @@ const Dashboard = () => {
   const { Trainings = [] } = data || {}
 
   function renderTrainingsProgress() {
-    if (Trainings.length === 0) return null
     return (
-      <Row gutter={24}>
+      <MainGridLayout>
         {Trainings.map(training => (
-          <Col key={training.Name} span={8}>
+          <Col xl='4' md='6' xs='12' key={training.Name}>
             <Card title={training.Name} className={styles.card}>
               <div className={styles.cardContent}>
                 <Progress
@@ -40,13 +42,13 @@ const Dashboard = () => {
             </Card>
           </Col>
         ))}
-      </Row>
+      </MainGridLayout>
     )
   }
 
   return (
     <PageLayout title={t('navigation.dashboard')} isLoading={isLoading}>
-      {renderTrainingsProgress()}
+      {Trainings.length !== 0 && renderTrainingsProgress()}
     </PageLayout>
   )
 }

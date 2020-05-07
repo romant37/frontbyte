@@ -1,11 +1,16 @@
 import { ReactElement } from 'react'
 import { AppLayoutSegments } from './AppLayout'
+import { MainGridLayoutSegments } from './MainGridLayout'
 
-export type AvailableSegmentsUnion = AppLayoutSegments
+export type AvailableSegmentsUnion = AppLayoutSegments | MainGridLayoutSegments
 
 export type AppLayoutSegmentProps = BaseLayoutSegmentProps<AppLayoutSegments>
-
-export type AvailableLayoutsProps = AppLayoutSegmentProps
+export type MainGridLayoutSegmentsProps = BaseLayoutSegmentProps<
+  MainGridLayoutSegments
+>
+export type AvailableLayoutsProps =
+  | AppLayoutSegmentProps
+  | MainGridLayoutSegmentsProps
 
 export type BaseLayoutSegmentProps<T extends AvailableSegmentsUnion> = {
   segmentId: T

@@ -16,6 +16,7 @@ const withLayout = (
 ) => {
   return (props: ExtendedWithChildrenProps<AvailableSegmentsUnion>) => {
     const childrenAsSegments = {} as LayoutSegments<AvailableSegmentsUnion>
+    const restChildren: Array<any> = []
     if (!props.children) {
       return <WrappedComponent {...props} />
     }
@@ -27,9 +28,19 @@ const withLayout = (
       const segmentId = element.props.segmentId
       if (segmentId) {
         childrenAsSegments[segmentId] = element
+      } else {
+        restChildren.push(element)
       }
     })
-    return <WrappedComponent {...props} segments={childrenAsSegments} />
+
+    console.log('withLayout', props.children)
+    return (
+      <WrappedComponent
+        {...props}
+        segments={childrenAsSegments}
+        children={restChildren}
+      />
+    )
   }
 }
 

@@ -1,5 +1,5 @@
 export const gridTheme = {
-  gridColumns: 24, // default 12
+  gridColumns: 12, // default 12
   breakpoints: {
     // defaults below
     xxl: 1440,
