@@ -1,4 +1,4 @@
-import { Action } from 'redux'
+import { AxiosPromise } from 'axios'
 
 export type ErrorType = {
   status: number
@@ -19,18 +19,21 @@ export type ResultType = DefaultPayloadType & {
   data?: object
 }
 
-export type APICallType = () => void | {
-  option: string
-  requests: {
-    [key: string]: () => void
-  }
-}
+export type APICallType = () =>
+  | AxiosPromise
+  | {
+      option: string
+      requests: {
+        [key: string]: () => AxiosPromise
+      }
+    }
 
-export type APIActionType = Action & {
+export interface ActionType<Type = any> {
+  type: Type
   subtype?: string
   apiCall?: APICallType
   successMessage?: string
   enableShowErrorMessage?: boolean
-  payload?: PayloadType
+  payload?: PayloadType | any
   result?: ResultType
 }

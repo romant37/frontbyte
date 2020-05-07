@@ -11,6 +11,4 @@ const reducers = combineReducers({
   usersList,
 })
 
-export type AppStateType = ReturnType<typeof reducers>
-
 export default reducers

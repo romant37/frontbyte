@@ -43,8 +43,7 @@ export default produce((draft, action) => {
       break
 
     case SESSION_IS_EXPIRED:
-      draft = initialState
-      break
+      return initialState
 
     default:
       return draft

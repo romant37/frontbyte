@@ -2,7 +2,7 @@ import { MiddlewareAPI, Dispatch } from 'redux'
 import { endsWith } from 'lodash'
 import { AuthorizationUtils } from 'utils'
 import { REQUEST_TYPE, SUCCESS_TYPE, FAILURE_TYPE } from 'api/apiCall'
-import { APIActionType } from 'api/types'
+import { ActionType } from 'types'
 import { sessionIsExpired } from 'modules/Auth/reducers/auth'
 
 const DEFAULT_PAYLOAD = {
@@ -11,7 +11,7 @@ const DEFAULT_PAYLOAD = {
 }
 
 const payloadMiddleware = ({ dispatch }: MiddlewareAPI) => (next: Dispatch) => (
-  action: APIActionType
+  action: ActionType
 ) => {
   const { error, data = {} } = action.payload || {}
 

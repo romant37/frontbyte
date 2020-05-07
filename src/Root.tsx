@@ -7,7 +7,7 @@ import { Spinner } from 'components/common'
 import { withAuthorizationPermissions } from 'modules/Auth/hocs'
 import configureStore from './store'
 import App from './App'
-import './i18n'
+import 'localization/i18n'
 import 'normalize.css'
 import 'antd/dist/antd.css'
 
