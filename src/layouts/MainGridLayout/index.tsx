@@ -1,15 +1,21 @@
 import React from 'react'
-import { Container, Row } from 'styled-bootstrap-grid'
+import { Container, Row, Col } from 'styled-bootstrap-grid'
 import { LayoutProps } from '../layout.contract'
 import withLayout from '../withLayout'
 
 export type MainGridLayoutSegments = 'content'
 type InternalLayoutProps = LayoutProps<MainGridLayoutSegments>
 
-const MainGridLayout = ({ children }: any) => {
+const MainGridLayout = ({ groups }: any) => {
   return (
     <Container fluid>
-      <Row>{children}</Row>
+      <Row>
+        {groups?.content.map((item: any) => (
+          <Col xl='4' md='6' xs='12' key={item.key}>
+            {item}
+          </Col>
+        ))}
+      </Row>
     </Container>
   )
 }

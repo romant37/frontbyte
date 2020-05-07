@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Card, Progress } from 'antd'
-import { Row, Col } from 'styled-bootstrap-grid'
 import { PageLayout } from 'layouts'
 import { MainGridLayout } from 'layouts'
 // import { MainGridLayoutSegmentProps } from 'layouts/layout.contract'
@@ -27,20 +26,23 @@ const Dashboard = () => {
     return (
       <MainGridLayout>
         {Trainings.map(training => (
-          <Col xl='4' md='6' xs='12' key={training.Name}>
-            <Card title={training.Name} className={styles.card}>
-              <div className={styles.cardContent}>
-                <Progress
-                  strokeColor={{
-                    '0%': '#108ee9',
-                    '100%': '#87d068',
-                  }}
-                  type='circle'
-                  percent={training.Progress}
-                />
-              </div>
-            </Card>
-          </Col>
+          <Card
+            title={training.Name}
+            className={styles.card}
+            groupId='content'
+            key={training.Name}
+          >
+            <div className={styles.cardContent}>
+              <Progress
+                strokeColor={{
+                  '0%': '#108ee9',
+                  '100%': '#87d068',
+                }}
+                type='circle'
+                percent={training.Progress}
+              />
+            </div>
+          </Card>
         ))}
       </MainGridLayout>
     )

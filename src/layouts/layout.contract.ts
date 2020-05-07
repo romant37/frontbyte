@@ -14,6 +14,7 @@ export type AvailableLayoutsProps =
 
 export type BaseLayoutSegmentProps<T extends AvailableSegmentsUnion> = {
   segmentId: T
+  groupId?: T
 }
 
 export type LayoutSegments<T extends AvailableSegmentsUnion> = {
@@ -23,6 +24,7 @@ export type LayoutSegments<T extends AvailableSegmentsUnion> = {
 export type LayoutProps<T extends AvailableSegmentsUnion> = {
   className?: string
   segments?: LayoutSegments<T>
+  groups?: LayoutSegments<T>
 }
 
 export type ExtendedWithChildrenProps<T extends AvailableSegmentsUnion> = {
