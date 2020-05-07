@@ -1,0 +1,4 @@
+window.cc = {
+  apiBaseAddress: '/',
+  baseName: '/',
+}

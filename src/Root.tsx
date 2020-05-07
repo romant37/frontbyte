@@ -1,36 +1,17 @@
-import React, { Suspense, lazy } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
-import { Router, Switch, Route } from 'react-router-dom'
-import { history } from 'utils'
-import { LanguageLayout } from 'layouts'
-import { Spinner } from 'components/common'
-import { withAuthorizationPermissions } from 'modules/Auth/hocs'
-import configureStore from './store'
-import App from './App'
-import 'localization/i18n'
+import { I18nextProvider } from 'react-i18next'
+import store from 'store'
+import i18n from 'localization/i18n'
+import RootRouting from 'routing/RootRouting'
 import 'normalize.css'
-import 'antd/dist/antd.css'
-
-const store = configureStore()
-const Login = lazy(() => import('modules/Auth/pages/Login'))
 
 const Root = () => {
   return (
     <Provider store={store}>
-      <LanguageLayout>
-        <Router history={history}>
-          <Suspense fallback={<Spinner />}>
-            <Switch>
-              <Route
-                exact
-                path='/login'
-                component={withAuthorizationPermissions(Login)}
-              />
-              <Route path='/' component={App} />
-            </Switch>
-          </Suspense>
-        </Router>
-      </LanguageLayout>
+      <I18nextProvider i18n={i18n}>
+        <RootRouting />
+      </I18nextProvider>
     </Provider>
   )
 }

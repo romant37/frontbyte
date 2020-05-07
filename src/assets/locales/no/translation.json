@@ -1,0 +1,46 @@
+{
+  "projectInfo": {
+    "info": "OCEANs læringsplattform"
+  },
+  "main": {
+    "infoTitle": "OCEANs læringsplattform",
+    "infoText": "Eksempelinnhold brukt med forhåndskonfigurert layout. Beholderen er abstrakt til komponent mye høyere i tre og stylet der."
+  },
+  "login": {
+    "forgotPassword": "Glemt passordet?",
+    "company": "Selskap",
+    "user": "Bruker",
+    "password": "Passord",
+    "login": "Logg Inn",
+    "info": "Velkommen til OCEAN E-learning plattform. Vennligst logg inn for å starte",
+    "companyRequired": "Firma er påkrevd",
+    "emailRequired": "E-post er påkrevd",
+    "emailInvalid": "Ugyldig epostadresse",
+    "passwordRequired": "Passord er påkrevd"
+  },
+  "footer": {
+    "poweredBy": "Drevet av"
+  },
+  "forgottenPassword": {
+    "company": "Selskap",
+    "email": "E-post",
+    "companyRequired": "Firma er påkrevd",
+    "emailRequired": "E-post er påkrevd",
+    "emailInvalid": "Ugyldig epostadresse",
+    "requestNewPassword": "Be om nytt passord",
+    "backToLogin": "Tilbake til innlogging",
+    "footer": "Har du ikke en e-postadresse til bedriften? Kontakt treningsansvarlig for å tilbakestille passordet ditt.",
+    "header1": "Glemt passordet?",
+    "header2": "Be om et nytt passord via e-post."
+  },
+  "trainingLibrary": {
+    "allTrainingSubjects": "Alle treningsfag",
+    "trainingTypes": "Treningstyper",
+    "elearning": "E-læring",
+    "electronicDistanceCourse": "Elektronisk distansekurs",
+    "rapidElearning": "Rask e-læring",
+    "pocketGuides": "Lommeguider",
+    "learningFilms": "Lære film",
+    "surveys": "Undersøkelser"
+  }
+}

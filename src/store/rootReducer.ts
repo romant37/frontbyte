@@ -1,14 +1,12 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from '@reduxjs/toolkit'
+import { connectRouter } from 'connected-react-router'
 import auth from 'modules/Auth/reducers/auth'
-import dicts from 'modules/common/reducers/dicts'
-import dashboard from 'modules/Dashboard/reducers/dashboard'
-import usersList from 'modules/Users/reducers/usersList'
+import { History } from 'history'
 
-const reducers = combineReducers({
-  auth,
-  dicts,
-  dashboard,
-  usersList,
-})
+const createRootReducer = (history: History) =>
+  combineReducers({
+    router: connectRouter(history),
+    auth,
+  })
 
-export default reducers
+export default createRootReducer

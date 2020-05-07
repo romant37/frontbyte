@@ -1,35 +1,26 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import translationEng from './locales/en/translation.json'
-import translationRus from './locales/ru/translation.json'
+import locales_no from 'assets/locales/no/translation.json'
+import locales_en from 'assets/locales/en/translation.json'
 
 i18n.use(initReactI18next).init({
-  resources: {
-    en: {
-      translations: translationEng,
-    },
-    ru: {
-      translations: translationRus,
-    },
-  },
-
-  initImmediate: false,
+  interpolation: { escapeValue: false },
   fallbackLng: 'en',
+  debug: process.env.NODE_ENV === 'development',
+  saveMissing: true,
+  preload: ['en', 'no'],
   lng: 'en',
-  preload: ['en', 'ru'],
-
   ns: ['translations'],
   defaultNS: 'translations',
-
-  keySeparator: false,
-
-  interpolation: {
-    escapeValue: false,
-    formatSeparator: ',',
+  resources: {
+    en: {
+      translations: locales_en,
+    },
+    no: {
+      translations: locales_no,
+    },
   },
-
   react: {
-    wait: true,
     bindI18n: 'languageChanged',
   },
 })

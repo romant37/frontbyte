@@ -1,0 +1,46 @@
+{
+  "projectInfo": {
+    "info": "OCEAN Learning Platform"
+  },
+  "main": {
+    "infoTitle": "OCEAN Learning Platform",
+    "infoText": "Sample content used with preconfigured layout. The container is abstracted to component much higher in tree and styled there."
+  },
+  "login": {
+    "forgotPassword": "Forgot your password?",
+    "company": "Company",
+    "user": "User",
+    "password": "Password",
+    "login": "Login",
+    "info": "Welcome to the OCEAN E-learning platform. Please login to start",
+    "companyRequired": "Company is required",
+    "emailRequired": "E-mail is required",
+    "emailInvalid": "Invalid e-mail address",
+    "passwordRequired": "Password is required"
+  },
+  "footer": {
+    "poweredBy": "Powered by"
+  },
+  "forgottenPassword": {
+    "company": "Company",
+    "email": "E-mail",
+    "companyRequired": "Company is required",
+    "emailRequired": "E-mail is required",
+    "emailInvalid": "Invalid e-mail address",
+    "requestNewPassword": "Request new password",
+    "backToLogin": "Back to login",
+    "footer": "Don't have a company e-mail address? Contact your training manager to reset your password.",
+    "header1": "Forgot your password?",
+    "header2": "Request a new password via e-mail."
+  },
+  "trainingLibrary": {
+    "allTrainingSubjects": "All training subjects",
+    "trainingTypes": "Training types",
+    "elearning": "E-learning",
+    "electronicDistanceCourse": "Electronic distance course",
+    "rapidElearning": "Rapid E-learning",
+    "pocketGuides": "Pocket guides",
+    "learningFilms": "Learning films",
+    "surveys": "Surveys"
+  }
+}

@@ -44,14 +44,14 @@ module.exports = function (plop) {
         path: 'src/{{name}}/{{componentName name}}.tsx',
         template: `
           import React from 'react'
-          import styles from './{{componentName name}}.module.scss'
+          import { Wrapper } from './{{componentName name}}.styles'
 
-          interface I{{componentName name}}Props {
+          type {{componentName name}}Props = {
             children: React.ReactNode
           }
 
-          const {{componentName name}}: React.FC<I{{componentName name}}Props> = ({ children }) => {
-            return <div className={styles.container}>{children}</div>
+          const {{componentName name}}: React.FC<{{componentName name}}Props> = ({ children }) => {
+            return <Wrapper>{children}</Wrapper>
           }
 
           export default {{componentName name}}
@@ -94,10 +94,13 @@ module.exports = function (plop) {
       },
       {
         type: 'add',
-        path: 'src/{{name}}/{{componentName name}}.module.scss',
-        template: `:local {
-  .container {}
-}`,
+        transform: prettier,
+        path: 'src/{{name}}/{{componentName name}}.styles.ts',
+        template: `
+          import styled from 'styled-components'
+
+          export const Wrapper = styled.div${'``'}
+        `,
       },
     ],
   })
