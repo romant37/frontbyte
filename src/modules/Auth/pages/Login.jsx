@@ -99,11 +99,12 @@ const LoginPage = () => {
           validationSchema={VALIDATION_SCHEMA}
           initialValues={INITIAL_VALUES}
           onSubmit={handleSubmitForm}
-          isInitialValid
+          validateOnMount
           validateOnBlur
           validateOnChange
-          render={renderForm}
-        />
+        >
+          {props => renderForm(props)}
+        </Formik>
       </Card>
     </div>
   )
