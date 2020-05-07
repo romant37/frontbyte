@@ -139,12 +139,13 @@ const EditUserForm = props => {
           validationSchema={VALIDATION_SCHEMA}
           initialValues={user}
           onSubmit={handleSubmitForm}
-          isInitialValid
+          validateOnMount
           validateOnBlur
           validateOnChange
           enableReinitialize
-          render={renderForm}
-        />
+        >
+          {props => renderForm(props)}
+        </Formik>
       </Modal>
     </>
   )
